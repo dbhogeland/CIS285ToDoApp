@@ -22,7 +22,7 @@ public class Task {
      * Constructor for basic task
      * information that the user will provide. 
      */
-    public Task(String tN, String tSD, String tLD, String sD, String, dD){
+    public Task(String tN, String tSD, String tLD, String sD, String dD){
         
         taskName = tN;
         taskShortDesc = tSD;
