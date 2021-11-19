@@ -8,13 +8,34 @@ package cis285project;
  *
  * @author dbh00
  */
-public class CIS285Project {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+import javafx.application.Application;
+// import javafx.application.Application.launch;
+import javafx.scene.Parent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+
+public class CIS285Project extends Application {
+
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        
+        Parent root = FXMLLoader.load(getClass().getResource("ProjUI.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("To do Task Application");
+        primaryStage.show();
+        
     }
     
+    public static void main(String[] args) {
+        launch(args);
+        
+    }
 }
