@@ -7,6 +7,7 @@ package cis285project;
 /**
  *
  * @author dbh00
+ * @autho JCampy
  */
 
 import javafx.application.Application;
