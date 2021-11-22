@@ -18,9 +18,9 @@ This application is designed to allow a business to manage tasks for their emplo
         -The user creation tab allows for the creation of acccounts
 
 
-![](Images/UpdatedUIMock1.png)
-![](Images/UpdatedUIMock2.png)
-![](Images/UpdatedUIMock3.png)
+![](Doc/UpdatedUIMock1.png)
+![](Doc/UpdatedUIMock2.png)
+![](Doc/UpdatedUIMock3.png)
 
 
 
