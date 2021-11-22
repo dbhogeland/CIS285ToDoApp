@@ -12,11 +12,11 @@ package cis285project;
 
 public class Task {
     
-    private String taskName; //String variable for task name
-    private String taskShortDesc; // String variable for short description of a task
-    private String taskLongDesc; // Strig variable for long description of a task
-    private String startDate; // String variable for start date of a task. Can be converted to int if needed.
-    private String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
+    public String taskName; //String variable for task name
+    public String taskShortDesc; // String variable for short description of a task
+    public String taskLongDesc; // Strig variable for long description of a task
+    public String startDate; // String variable for start date of a task. Can be converted to int if needed.
+    public String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
     
     /*
      * Constructor for basic task
