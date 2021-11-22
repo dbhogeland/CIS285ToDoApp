@@ -80,9 +80,9 @@
                                                          </children>
                                                       </GridPane>
                                                       <Label fx:id="activeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                      <TextArea fx:id="activeLongDescTextField" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
+                                                      <TextArea fx:id="activeLongDescTextArea" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
                                                       <CheckBox fx:id="activeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                      <CheckBox fx:id="activeSelectedLbl" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
+                                                      <CheckBox fx:id="activeSelectedCheck" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
