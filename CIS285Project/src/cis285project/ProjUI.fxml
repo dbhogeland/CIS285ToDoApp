@@ -80,9 +80,9 @@
                                                          </children>
                                                       </GridPane>
                                                       <Label fx:id="activeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                      <TextArea fx:id="activeLongDescTextField" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
+                                                      <TextArea fx:id="activeLongDescTextArea" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
                                                       <CheckBox fx:id="activeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                      <CheckBox fx:id="activeSelectedLbl" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
+                                                      <CheckBox fx:id="activeSelectedCheck" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -243,7 +243,7 @@
                               <ChoiceBox fx:id="categorySelect" prefWidth="150.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Button fx:id="creatTaskButton" layoutX="520.0" layoutY="278.0" mnemonicParsing="false" onAction="#createTask" text="Create Task" />
+                        <Button fx:id="createTaskButton" layoutX="520.0" layoutY="278.0" mnemonicParsing="false" onAction="#createTask" text="Create Task" />
                         <Separator layoutY="351.0" prefHeight="5.0" prefWidth="705.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <Label layoutX="142.0" layoutY="375.0" text="Category:" />
                         <TextField fx:id="catNameTxtBox" layoutX="234.0" layoutY="371.0" />
