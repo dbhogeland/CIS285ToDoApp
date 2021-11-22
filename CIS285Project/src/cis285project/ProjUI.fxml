@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis285project.ProjUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis285project.ProjUIController">
    <children>
       <TabPane layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="705.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
          <tabs>
@@ -39,7 +39,7 @@
                                  <children>
                                     <Accordion layoutX="36.0" layoutY="84.0" prefHeight="369.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <panes>
-                                          <TitledPane animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
+                                          <TitledPane fx:id="activeCategoryAccordion" animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
                                           <TitledPane animated="false" text="Cat Temp 2" />
                                           <TitledPane animated="false" text="All Tasks" />
                                        </panes>
@@ -70,19 +70,19 @@
                                                             <Label text="Due:" />
                                                             <Label prefHeight="17.0" prefWidth="61.0" text="Created:" GridPane.rowIndex="2" />
                                                             <Label text="Updated:" GridPane.rowIndex="3" />
-                                                            <Label text="DueTemp" GridPane.columnIndex="1" />
-                                                            <Label text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                            <Label text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                            <Label prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <Label fx:id="activeDueLbl" text="DueTemp" GridPane.columnIndex="1" />
+                                                            <Label fx:id="activeStartLbl" text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label fx:id="activeCreatedLbl" text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label fx:id="activeUpdatedLbl" prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                             <Label text="Start:" GridPane.rowIndex="1" />
                                                             <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                            <Label text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                            <Label fx:id="activeAssignedLbl" text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                          </children>
                                                       </GridPane>
-                                                      <Label layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                      <TextArea editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
-                                                      <CheckBox layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                      <CheckBox layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
+                                                      <Label fx:id="activeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
+                                                      <TextArea fx:id="activeLongDescTextField" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
+                                                      <CheckBox fx:id="activeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
+                                                      <CheckBox fx:id="activeSelectedLbl" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -119,7 +119,7 @@
                                        <children>
                                           <Accordion layoutX="36.0" layoutY="84.0" prefHeight="369.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <panes>
-                                                <TitledPane animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
+                                                <TitledPane fx:id="completeCategoryAccordion" animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
                                                 <TitledPane animated="false" text="Cat Temp 2" />
                                                 <TitledPane animated="false" text="All Tasks" />
                                              </panes>
@@ -150,19 +150,19 @@
                                                                   <Label text="Due:" />
                                                                   <Label prefHeight="17.0" prefWidth="61.0" text="Created:" GridPane.rowIndex="2" />
                                                                   <Label text="Updated:" GridPane.rowIndex="3" />
-                                                                  <Label text="DueTemp" GridPane.columnIndex="1" />
-                                                                  <Label text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <Label text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                  <Label prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <Label fx:id="completeDueLbl" text="DueTemp" GridPane.columnIndex="1" />
+                                                                  <Label fx:id="completeStartLbl" text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <Label fx:id="CompleteCreatedLbl" text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <Label fx:id="completeUpdatedLbl" prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                                   <Label text="Start:" GridPane.rowIndex="1" />
                                                                   <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                                  <Label text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <Label fx:id="completeAssignedLbl" text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                                </children>
                                                             </GridPane>
-                                                            <Label layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                            <TextArea editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
-                                                            <CheckBox layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                            <CheckBox layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
+                                                            <Label fx:id="completeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
+                                                            <TextArea fx:id="completeLongDescTxtField" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
+                                                            <CheckBox fx:id="completeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
+                                                            <CheckBox fx:id="completeSelectedCheck" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
                                                          </children>
                                                       </AnchorPane>
                                                    </content>
@@ -269,8 +269,8 @@
                               <Label text="Change Password" />
                               <Label text="Old Password:" GridPane.rowIndex="1" />
                               <Label text="New Password:" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="oldPassTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="newPassTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="353.0" layoutY="54.0" prefHeight="119.0" prefWidth="316.0">
@@ -289,10 +289,10 @@
                               <Label text="City:" GridPane.rowIndex="1" />
                               <Label text="State:" GridPane.rowIndex="2" />
                               <Label text="Phone:" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" />
-                              <TextField prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="streetTxtBox" GridPane.columnIndex="1" />
+                              <TextField fx:id="cityTxtBox" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="stateTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="phoneTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                         <Label layoutX="353.0" layoutY="31.0" text="Contact Information" />
@@ -312,8 +312,8 @@
                               <Label text="Change Password" />
                               <Label text="Old Password:" GridPane.rowIndex="1" />
                               <Label text="New Password:" GridPane.rowIndex="2" />
-                              <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="adminOldPassTxtBox" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="adminNewPassTxtBox" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="353.0" layoutY="281.0" prefHeight="119.0" prefWidth="316.0">
@@ -332,15 +332,15 @@
                               <Label text="City:" GridPane.rowIndex="1" />
                               <Label text="State:" GridPane.rowIndex="2" />
                               <Label text="Phone:" GridPane.rowIndex="3" />
-                              <TextField disable="true" GridPane.columnIndex="1" />
-                              <TextField disable="true" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="adminStreetTxtBox" disable="true" GridPane.columnIndex="1" />
+                              <TextField fx:id="adminCityTxtBox" disable="true" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="adminStateTxtBox" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="adminPhoneTxtBox" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                         <Label layoutX="353.0" layoutY="256.0" text="Contact Information" />
                         <Label layoutX="27.0" layoutY="256.0" text="User:" />
-                        <TextField disable="true" layoutX="66.0" layoutY="252.0" prefHeight="25.0" prefWidth="207.0" />
+                        <TextField fx:id="adminUserTxtBox" disable="true" layoutX="66.0" layoutY="252.0" prefHeight="25.0" prefWidth="207.0" />
                         <Button fx:id="updateUser" layoutX="137.0" layoutY="135.0" mnemonicParsing="false" text="Update" />
                         <Button fx:id="updateOther" disable="true" layoutX="137.0" layoutY="388.0" mnemonicParsing="false" text="Update" />
                      </children></AnchorPane>
@@ -364,8 +364,8 @@
                               <Label text="Create Password" />
                               <Label text="Password:" GridPane.rowIndex="1" />
                               <Label text="Confirm Password:" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="createPassTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="createConfirmPassTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="47.0" layoutY="38.0" prefHeight="30.0" prefWidth="242.0">
@@ -378,7 +378,7 @@
                           </rowConstraints>
                            <children>
                               <Label text="User ID:" />
-                              <TextField prefHeight="25.0" prefWidth="195.0" GridPane.columnIndex="1" />
+                              <TextField fx:id="createIDTxtBox" prefHeight="25.0" prefWidth="195.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="360.0" layoutY="62.0" prefHeight="119.0" prefWidth="316.0">
@@ -397,14 +397,14 @@
                               <Label text="City:" GridPane.rowIndex="1" />
                               <Label text="State:" GridPane.rowIndex="2" />
                               <Label text="Phone:" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" />
-                              <TextField prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="createStreetTxtBox" GridPane.columnIndex="1" />
+                              <TextField fx:id="createCityTxtBox" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="createStateTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="createPhoneTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                         <Label layoutX="353.0" layoutY="38.0" text="Contact Information" />
-                        <Button layoutX="328.0" layoutY="215.0" mnemonicParsing="false" text="Create" />
+                        <Button fx:id="createUserBtn" layoutX="328.0" layoutY="215.0" mnemonicParsing="false" text="Create" />
                      </children>
                   </AnchorPane>
               </content>
@@ -413,7 +413,7 @@
       </TabPane>
       <ButtonBar layoutX="419.0" layoutY="458.0" prefHeight="40.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="419.0" AnchorPane.rightAnchor="14.0">
         <buttons>
-            <Button layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="completeBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
                <tooltip>
                   <Tooltip text="Completes Checked Tasks" />
                </tooltip>
@@ -425,7 +425,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="editBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
                <tooltip>
                   <Tooltip text="Edits Selected Tasks" />
                </tooltip>
@@ -437,7 +437,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="385.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="deleteBtn" layoutX="385.0" layoutY="18.0" mnemonicParsing="false">
                <tooltip>
                   <Tooltip text="Deletes Selected Tasks" />
                </tooltip>
@@ -451,7 +451,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Label layoutX="23.0" layoutY="497.0" text="FirstTemp LastTemp - RoleTemp" />
+      <Label fx:id="userRoleLbl" layoutX="23.0" layoutY="497.0" text="FirstTemp LastTemp - RoleTemp" />
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="User">
