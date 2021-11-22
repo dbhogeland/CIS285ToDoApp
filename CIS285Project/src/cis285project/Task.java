@@ -12,23 +12,27 @@ package cis285project;
 
 public class Task {
     
-    public String taskName; //String variable for task name
-    public String taskShortDesc; // String variable for short description of a task
-    public String taskLongDesc; // Strig variable for long description of a task
-    public String startDate; // String variable for start date of a task. Can be converted to int if needed.
-    public String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
-    
+    private String taskName; //String variable for task name
+    private String taskShortDesc; // String variable for short description of a task
+    private String taskLongDesc; // Strig variable for long description of a task
+    private String startDate; // String variable for start date of a task. Can be converted to int if needed.
+    private String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
+    private String categoryTag; // String variable for category tag to group task later on.
+    private String customTag; // String varaible for tags for specific task ***** Needs to be implemented in UI *****
     /*
-     * Constructor for basic task
-     * information that the user will provide. 
+     * Constructor for basic Task
+     * information that the user will provide 
      */
     public Task(String tN, String tSD, String tLD, String sD, String dD){
         
-        taskName = tN;
-        taskShortDesc = tSD;
-        taskLongDesc = tLD;
-        startDate = sD;
-        dueDate = dD;
+        
+        this.taskName = tN;
+        this.taskShortDesc = tSD;
+        this.taskLongDesc = tLD;
+        this.startDate = sD;
+        this.dueDate = dD;
+        this.categoryTag = "";
+        
     
     }
     
@@ -65,6 +69,14 @@ public class Task {
     }
     public String getDueDate(){ // method for retrieving task due date 
         return dueDate;
+    }
+    
+    public void setCategoryTag(String c) { // Method for setting a categoryTag
+        this.categoryTag = c;
+    }
+    
+    public String getCategoryTag() { // Method for retrieving a categoryTag
+        return categoryTag;
     }
     
 }
