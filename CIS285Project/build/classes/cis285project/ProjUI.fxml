@@ -420,7 +420,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@CIS285Project/checkbox.png" />
+                        <Image url="@../../../Doc/check.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -432,7 +432,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@CIS285Project/edit.png" />
+                        <Image url="@../../../Doc/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -444,7 +444,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@CIS285Project/delete.png" />
+                        <Image url="@../../../Doc/delete.png" />
                      </image>
                   </ImageView>
                </graphic>
