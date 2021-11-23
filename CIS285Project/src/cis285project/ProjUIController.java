@@ -10,6 +10,11 @@ package cis285project;
  * @author Jason
  */
 
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -18,6 +23,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 //import javafx.scene.control.ButtonBase;
@@ -205,6 +212,9 @@ public class ProjUIController {
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
     
+    Connection con1;
+    PreparedStatement insert; 
+    
     /*
      * Void method which creates a LocalDate object for start date and gets 
      * the value from UI DatePicker and converts it into a string startD
@@ -235,6 +245,30 @@ public class ProjUIController {
         
         Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
                 startD, dueD);
+        
+         
+        
+        try {
+            Class.forName("com.sun.jdi.connect.spi.Connection");
+            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "CIS285DB!!");
+            insert = con1.prepareStatement("insert into task(task_id,task_name,task_short_desc,task_long_desc,task_start_date,task_due_date,task_category,task_tag)VALUES(?,?,?,?,?,?,?,?)");
+            insert.setString(0, taskObj.getTaskName());
+            insert.setString(1, taskObj.getTaskShortDesc());
+            insert.setString(2, taskObj.getTaskLongDesc());
+            insert.setString(3, taskObj.getStartDate());
+            insert.setString(4, taskObj.getDueDate());
+            insert.setString(5, taskObj.getCategoryTag());
+            // insert.setString(6, taskObj.getTags()); For when we implement tags
+            insert.executeUpdate();
+            
+            System.out.println("Successfully updated MySql server!");
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
         taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
         
@@ -270,6 +304,7 @@ public class ProjUIController {
         longDescTxtBox.clear();
         startDatePicker.getEditor().clear();
         dueDatePicker.getEditor().clear();
+        // categorySelect.getItems().clear();
     }
     
     /*
