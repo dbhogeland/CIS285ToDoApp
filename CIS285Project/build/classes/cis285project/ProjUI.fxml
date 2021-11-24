@@ -307,7 +307,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Doc/check.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/check.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -319,7 +319,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Doc/edit.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -331,7 +331,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Doc/delete.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/delete.png" />
                      </image>
                   </ImageView>
                </graphic>
