@@ -10,10 +10,12 @@ package cis285project;
  * @author Jason
  */
 
+/*
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+*/
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,9 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
-//import javafx.scene.control.ButtonBase;
-//import javafx.scene.control.Labeled;
-//import java.util.HashSet;
+
 
 
 public class ProjUIController {
@@ -212,8 +212,8 @@ public class ProjUIController {
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
     
-    Connection con1;
-    PreparedStatement insert; 
+    //Connection con1; // Creates a variable for connection to MySQL database
+    //PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
     
     /*
      * Void method which creates a LocalDate object for start date and gets 
@@ -240,37 +240,49 @@ public class ProjUIController {
     /*
      * Void method that creates a new object of Task with the parameters 
      * in the constructor under Task.java when the create task button is pressed
+     * It also updates the MySQL database in a table called task adding the info
+     * passed into the task Object parameters.
      */
     public void createTaskButtonClick(ActionEvent event) {
         
         Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
                 startD, dueD);
         
-         
+        taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
         
+         
+        /*  For use with database marked out so it does not interfere with others running the program
         try {
+            
             Class.forName("com.sun.jdi.connect.spi.Connection");
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "CIS285DB!!");
-            insert = con1.prepareStatement("insert into task(task_id,task_name,task_short_desc,task_long_desc,task_start_date,task_due_date,task_category,task_tag)VALUES(?,?,?,?,?,?,?,?)");
-            insert.setString(0, taskObj.getTaskName());
-            insert.setString(1, taskObj.getTaskShortDesc());
-            insert.setString(2, taskObj.getTaskLongDesc());
-            insert.setString(3, taskObj.getStartDate());
-            insert.setString(4, taskObj.getDueDate());
-            insert.setString(5, taskObj.getCategoryTag());
-            // insert.setString(6, taskObj.getTags()); For when we implement tags
+            
+            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
+            
+            insert = con1.prepareStatement("INSERT INTO task(task_name,task_short_desc,task_long_desc," // 
+                    + "task_start_date,task_due_date,task_category)VALUES(?,?,?,?,?,?)"); 
+            
+            insert.setString(1, taskObj.getTaskName());
+            insert.setString(2, taskObj.getTaskShortDesc());
+            insert.setString(3, taskObj.getTaskLongDesc());
+            insert.setString(4, taskObj.getStartDate());
+            insert.setString(5, taskObj.getDueDate());
+            insert.setString(6, taskObj.getCategoryTag());
+            // insert.setString(7, taskObj.getTags()); For when we implement tags
+            
             insert.executeUpdate();
             
             System.out.println("Successfully updated MySql server!");
             
         } catch (ClassNotFoundException ex) {
+            
             Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (SQLException ex) {
+            
             Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
-        
-
-        taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
+        */
         
         // Temporary output statements to make sure input is doing what it needs to
 
@@ -286,6 +298,7 @@ public class ProjUIController {
      * when the create category button is pressed
      */
     public void createCatButtonClick(ActionEvent event) {
+        
         Category catObj = new Category(catNameTxtBox.getText());
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
         
@@ -296,15 +309,17 @@ public class ProjUIController {
     }
     
     /*
-     * Voud method that clears the input values of creatTask textfields and DatePickers
+     * Void method that clears the input values of creatTask textfields and DatePickers
      */
     public void clearCreateTaskInfo() {
+        
         titleTxtBox.clear();
         shortDescTxtBox.clear();
         longDescTxtBox.clear();
         startDatePicker.getEditor().clear();
         dueDatePicker.getEditor().clear();
         // categorySelect.getItems().clear();
+        
     }
     
     /*
