@@ -3,10 +3,10 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -48,57 +48,7 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Accordion layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <panes>
-                                          <TitledPane animated="false" text="Short Description Temp 1 - Due Today 10am">
-                                             <content>
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                                   <children>
-                                                      <GridPane layoutX="251.0" layoutY="14.0" prefHeight="107.0" prefWidth="220.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.5" minWidth="10.0" prefWidth="58.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.5" minWidth="10.0" prefWidth="131.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Due:" />
-                                                            <Label prefHeight="17.0" prefWidth="61.0" text="Created:" GridPane.rowIndex="2" />
-                                                            <Label text="Updated:" GridPane.rowIndex="3" />
-                                                            <Label fx:id="activeDueLbl" text="DueTemp" GridPane.columnIndex="1" />
-                                                            <Label fx:id="activeStartLbl" text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                            <Label fx:id="activeCreatedLbl" text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                            <Label fx:id="activeUpdatedLbl" prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                            <Label text="Start:" GridPane.rowIndex="1" />
-                                                            <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                            <Label fx:id="activeAssignedLbl" text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                         </children>
-                                                      </GridPane>
-                                                      <Label fx:id="activeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                      <TextArea fx:id="activeLongDescTextArea" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
-                                                      <CheckBox fx:id="activeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                      <CheckBox fx:id="activeSelectedCheck" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </TitledPane>
-                                          <TitledPane animated="false" text="Short Description Temp 2 - Due Today 11am">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                             </content>
-                                          </TitledPane>
-                                          <TitledPane animated="false" text="Short Description Temp 3 - Due Today 9pm">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                             </content>
-                                          </TitledPane>
-                                       </panes>
-                                    </Accordion>
+                                    <Accordion layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -117,68 +67,12 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Accordion layoutX="36.0" layoutY="84.0" prefHeight="369.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <panes>
-                                                <TitledPane fx:id="completeCategoryAccordion" animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
-                                                <TitledPane animated="false" text="Cat Temp 2" />
-                                                <TitledPane animated="false" text="All Tasks" />
-                                             </panes>
-                                          </Accordion>
+                                          <ListView fx:id="completeCategoryListView" layoutX="-8.0" layoutY="14.0" prefHeight="427.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Accordion layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <panes>
-                                                <TitledPane animated="false" text="Short Description Temp 1 - Completed at 10am">
-                                                   <content>
-                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                                         <children>
-                                                            <GridPane layoutX="251.0" layoutY="14.0" prefHeight="107.0" prefWidth="220.0">
-                                                               <columnConstraints>
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.5" minWidth="10.0" prefWidth="58.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.5" minWidth="10.0" prefWidth="131.0" />
-                                                               </columnConstraints>
-                                                               <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                               </rowConstraints>
-                                                               <children>
-                                                                  <Label text="Due:" />
-                                                                  <Label prefHeight="17.0" prefWidth="61.0" text="Created:" GridPane.rowIndex="2" />
-                                                                  <Label text="Updated:" GridPane.rowIndex="3" />
-                                                                  <Label fx:id="completeDueLbl" text="DueTemp" GridPane.columnIndex="1" />
-                                                                  <Label fx:id="completeStartLbl" text="StartTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <Label fx:id="CompleteCreatedLbl" text="CreatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                  <Label fx:id="completeUpdatedLbl" prefHeight="22.0" prefWidth="110.0" text="UpdatedTemp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                  <Label text="Start:" GridPane.rowIndex="1" />
-                                                                  <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                                  <Label fx:id="completeAssignedLbl" text="AssignedTemp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                               </children>
-                                                            </GridPane>
-                                                            <Label fx:id="completeShortDescLbl" layoutX="14.0" layoutY="14.0" text="Short Description Temp 1" />
-                                                            <TextArea fx:id="completeLongDescTxtField" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="245.0" prefWidth="200.0" text="Long Description Temp" wrapText="true" />
-                                                            <CheckBox fx:id="completeCompletedCheck" layoutX="281.0" layoutY="174.0" mnemonicParsing="false" text="Completed" />
-                                                            <CheckBox fx:id="completeSelectedCheck" layoutX="281.0" layoutY="205.0" mnemonicParsing="false" text="Selected" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                   </content>
-                                                </TitledPane>
-                                                <TitledPane animated="false" text="Short Description Temp 2 - Completed at 11am">
-                                                   <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                                   </content>
-                                                </TitledPane>
-                                                <TitledPane animated="false" text="Short Description Temp 3 - Completed at 9pm">
-                                                   <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                                   </content>
-                                                </TitledPane>
-                                             </panes>
-                                          </Accordion>
+                                          <Accordion fx:id="completedTaskAccordion" layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                  </items>

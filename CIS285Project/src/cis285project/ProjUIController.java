@@ -18,8 +18,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
 //import java.util.HashSet;
@@ -163,32 +167,9 @@ public class ProjUIController {
 
     // The following fields are located on the Completed Tasks tab
     @FXML
-    private Label completeShortDescLbl; // Label to display the short desscription of the task
-
-    @FXML
-    private TextArea completeLongDescTextArea; // Text area to display the long description of the task
-
-    @FXML
-    private Label completeDueLbl; // Label to display the due date of the task
-
-    @FXML
-    private Label completeStartLbl; // Label to display the start date of the task
-
-    @FXML
-    private Label completeCreatedLbl; // Label to display the created date of the task
-
-    @FXML
-    private Label completeUpdatedLbl; // Label to display the Updated date of the task
-
-    @FXML
-    private Label completeAssignedLbl; // Label to display who assigned the task
-
-    @FXML
-    private CheckBox completeCompleteCheck; //Label to check for completion
-
-    @FXML
-    private CheckBox completeSelectedCheck; // Check box to select the task
-
+    public ListView<String> completeCategoryListView;
+    
+    
     // The following fields are on the bottom of the window and are persistent for all tabs
     @FXML
     private Label userRoleLbl; // Label to display the User ID and role of the active user
@@ -204,6 +185,9 @@ public class ProjUIController {
     
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
+    
+    
+    
     
     /*
      * Void method which creates a LocalDate object for start date and gets 
@@ -250,14 +234,20 @@ public class ProjUIController {
     /*
      * Void method that creates a category Object with the parameter categoryName
      * when the create category button is pressed
+     * Also, adds category name to Observable list on Category Class
+     *
      */
     public void createCatButtonClick(ActionEvent event) {
         Category catObj = new Category(catNameTxtBox.getText());
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
         
+        //categoryObservableList.add(catNameTxtBox.getText()); // Gets the category name and adds it to the observable list in the Category Class
+        completeCategoryListView.getItems().add(catObj.getCategoryName());
+        
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         
         categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+        
         
     }
     
@@ -280,7 +270,15 @@ public class ProjUIController {
         catNameTxtBox.clear();
         
     }
-
+    
+    public void setAllTasksOption() {
+        completeCategoryListView.getItems().add("All Tasks");
+    }
+        
+    
+    
+    
+    
 }
 
     
