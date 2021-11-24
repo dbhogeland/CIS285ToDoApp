@@ -33,10 +33,12 @@ public class CIS285Project extends Application {
         primaryStage.setTitle("To do Task Application");
         primaryStage.show();
         
+        
     }
     
     public static void main(String[] args) {
         launch(args);
+        
         
     }
 }
