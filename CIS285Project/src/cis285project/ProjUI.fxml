@@ -338,7 +338,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Label fx:id="userRoleLbl" layoutX="23.0" layoutY="497.0" text="FirstTemp LastTemp - RoleTemp" />
+      <Label fx:id="userRoleLbl" layoutX="23.0" layoutY="497.0" text="UserIDTemp - RoleTemp" />
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="User">
