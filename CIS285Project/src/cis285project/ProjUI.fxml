@@ -152,8 +152,7 @@
                                                       <Label fx:id="completeAssignedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                    </children>
                                                 </GridPane>
-                                                <CheckBox fx:id="completeCompletedCheck" layoutX="292.0" layoutY="252.0" mnemonicParsing="false" text="Completed" />
-                                                <CheckBox fx:id="completeSelectedCheck" layoutX="292.0" layoutY="294.0" mnemonicParsing="false" text="Selected" />
+                                                <CheckBox fx:id="completeSelectedCheck" layoutX="292.0" layoutY="248.0" mnemonicParsing="false" text="Selected" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -381,7 +380,9 @@
                            </children>
                         </GridPane>
                         <Label layoutX="353.0" layoutY="38.0" text="Contact Information" />
-                        <Button fx:id="createUserBtn" layoutX="328.0" layoutY="215.0" mnemonicParsing="false" text="Create" />
+                        <Button fx:id="createUserBtn" layoutX="327.0" layoutY="269.0" mnemonicParsing="false" text="Create" />
+                        <Label layoutX="273.0" layoutY="215.0" text="User Role:" />
+                        <ChoiceBox fx:id="userRoleChoiceBox" layoutX="360.0" layoutY="211.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
               </content>
