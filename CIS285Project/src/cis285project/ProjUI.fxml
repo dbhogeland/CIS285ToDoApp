@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -41,7 +41,52 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Accordion layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ChoiceBox fx:id="activeTaskChoiceBox" layoutX="12.0" layoutY="2.0" prefHeight="25.0" prefWidth="230.0" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <AnchorPane layoutX="130.0" layoutY="25.0" prefHeight="200.0" prefWidth="287.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                                       <children>
+                                          <GridPane layoutX="25.0" layoutY="25.0" prefHeight="51.0" prefWidth="253.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label fx:id="activeTaskNameLbl" text="Task Name" />
+                                                <Label fx:id="activeShortDescLbl" text="Short Description" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                          <TextArea fx:id="activeLongDescTextArea" editable="false" layoutX="25.0" layoutY="87.0" prefHeight="303.0" prefWidth="254.0" text="Long Description" />
+                                          <GridPane layoutX="292.0" layoutY="25.0" prefHeight="124.0" prefWidth="200.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="75.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="125.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Due:" />
+                                                <Label text="Start:" GridPane.rowIndex="1" />
+                                                <Label text="Created:" GridPane.rowIndex="2" />
+                                                <Label text="Updated:" GridPane.rowIndex="3" />
+                                                <Label text="Assigned by:" GridPane.rowIndex="4" />
+                                                <Label fx:id="activeDueLbl" text="Label" GridPane.columnIndex="1" />
+                                                <Label fx:id="activeStartLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="activeCreatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="activeUpdatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label fx:id="activeAssignedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                             </children>
+                                          </GridPane>
+                                          <CheckBox fx:id="activeCompletedCheck" layoutX="292.0" layoutY="252.0" mnemonicParsing="false" text="Completed" />
+                                          <CheckBox fx:id="activeSelectedCheck" layoutX="292.0" layoutY="294.0" mnemonicParsing="false" text="Selected" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </items>
@@ -65,7 +110,52 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Accordion fx:id="completedTaskAccordion" layoutX="129.0" layoutY="81.0" prefHeight="369.0" prefWidth="436.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ChoiceBox fx:id="completedTaskChoiceBox" layoutY="2.0" prefHeight="25.0" prefWidth="512.0" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <AnchorPane layoutY="24.0" prefHeight="391.0" prefWidth="506.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                                             <children>
+                                                <GridPane layoutX="25.0" layoutY="25.0" prefHeight="51.0" prefWidth="253.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label fx:id="completeTaskNameLbl" text="Task Name" />
+                                                      <Label fx:id="completeShortDescLbl" text="Short Description" GridPane.rowIndex="1" />
+                                                   </children>
+                                                </GridPane>
+                                                <TextArea fx:id="completeLongDescTextArea" editable="false" layoutX="25.0" layoutY="87.0" prefHeight="303.0" prefWidth="254.0" text="Long Description" />
+                                                <GridPane layoutX="292.0" layoutY="25.0" prefHeight="124.0" prefWidth="200.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="75.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="125.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Due:" />
+                                                      <Label text="Start:" GridPane.rowIndex="1" />
+                                                      <Label text="Created:" GridPane.rowIndex="2" />
+                                                      <Label text="Updated:" GridPane.rowIndex="3" />
+                                                      <Label text="Assigned by:" GridPane.rowIndex="4" />
+                                                      <Label fx:id="completeDueLbl" text="Label" GridPane.columnIndex="1" />
+                                                      <Label fx:id="completeStartLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="completeCreatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="completeUpdatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="completeAssignedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                                <CheckBox fx:id="completeCompletedCheck" layoutX="292.0" layoutY="252.0" mnemonicParsing="false" text="Completed" />
+                                                <CheckBox fx:id="completeSelectedCheck" layoutX="292.0" layoutY="294.0" mnemonicParsing="false" text="Selected" />
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </items>
