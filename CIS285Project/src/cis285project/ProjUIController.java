@@ -8,6 +8,8 @@ package cis285project;
 /**
  *
  * @author Jason
+ * assisted by Daniel
+ * 
  */
 
 import javafx.fxml.FXML;
@@ -23,7 +25,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
 //import java.util.HashSet;
@@ -164,10 +165,13 @@ public class ProjUIController {
 
     @FXML
     private CheckBox activeSelectedCheck; // Check Box to select the task
+    
+    @FXML
+    private ListView<String> activeCategoryListView; // List view to display categories
 
     // The following fields are located on the Completed Tasks tab
     @FXML
-    public ListView<String> completeCategoryListView;
+    public ListView<String> completeCategoryListView; // List view to display categories
     
     
     // The following fields are on the bottom of the window and are persistent for all tabs
@@ -241,8 +245,8 @@ public class ProjUIController {
         Category catObj = new Category(catNameTxtBox.getText());
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
         
-        //categoryObservableList.add(catNameTxtBox.getText()); // Gets the category name and adds it to the observable list in the Category Class
-        completeCategoryListView.getItems().add(catObj.getCategoryName());
+        completeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the completed list view
+        activeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the active list view
         
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         
@@ -271,6 +275,8 @@ public class ProjUIController {
         
     }
     
+    // Intended to install a All Tasks option into the list view
+    // My smooth brain cant get it to work yet
     public void setAllTasksOption() {
         completeCategoryListView.getItems().add("All Tasks");
     }

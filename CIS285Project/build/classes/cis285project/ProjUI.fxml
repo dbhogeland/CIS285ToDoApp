@@ -16,7 +16,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -37,13 +36,7 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Accordion layoutX="36.0" layoutY="84.0" prefHeight="369.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <panes>
-                                          <TitledPane fx:id="activeCategoryAccordion" animated="false" layoutX="10.0" layoutY="10.0" text="Cat Temp 1" />
-                                          <TitledPane animated="false" text="Cat Temp 2" />
-                                          <TitledPane animated="false" text="All Tasks" />
-                                       </panes>
-                                    </Accordion>
+                                    <ListView fx:id="activeCategoryListView" layoutX="-45.0" layoutY="36.0" prefHeight="427.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -65,9 +58,9 @@
                            <children>
                               <SplitPane dividerPositions="0.26588628762541805" layoutX="183.0" layoutY="106.0" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <items>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <AnchorPane fx:id="categoryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <ListView fx:id="completeCategoryListView" layoutX="-8.0" layoutY="14.0" prefHeight="427.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ListView fx:id="completeCategoryListView" layoutX="-30.0" layoutY="43.0" prefHeight="427.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -314,7 +307,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Doc/check.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/check.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -326,7 +319,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Doc/edit.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -338,7 +331,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Doc/delete.png" />
+                        <Image url="file:/C:/Users/dbh00/Documents/GitHub/CIS285ToDoApp/Doc/delete.png" />
                      </image>
                   </ImageView>
                </graphic>
