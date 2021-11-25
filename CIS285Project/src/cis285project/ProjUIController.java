@@ -20,11 +20,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
 //import java.util.HashSet;
@@ -119,6 +121,11 @@ public class ProjUIController {
     @FXML private Button completeBtn; // Button that updates the completed value for the task
     @FXML private Button editBtn; // Button that edits the selected task if the user has permission
     @FXML private Button deleteBtn; // Button that deletes the selected task if the user has permission
+    
+    @FXML private MenuItem signInMenuItem; // Menu Item to call the sign in popup window
+    @FXML private MenuItem signOutMenuItem; // Menu Item to sign out the user
+    @FXML private MenuItem exitMenuItem; // Menu Item that will close the application
+    @FXML private MenuItem userPermissionsMenuItem; // MenuItem that will show a popup that says what each role can do
     
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
@@ -225,12 +232,35 @@ public class ProjUIController {
         
     }
     
-
-        
+    /*
+     * Void method to call the sign in popup when the sign in menu item is clicked 
+     */
+    public void callSignInWindow(ActionEvent event) {
+        SignInPopup signInObj = new SignInPopup();
+        signInObj.display();
+    }
     
+    /*
+     * Void method to sign out the user
+     */
+    public void signOut(ActionEvent event) {
+        // ToDo
+    }
     
+    /*
+     * Void method that closes the application
+     */
+    public void closeApp(ActionEvent event) {
+        Platform.exit();
+    }
     
-    
+    /*
+     * Void method to show a pop up that will show what each role is allowed to do
+     */
+    public void showUserPermissions(ActionEvent event) {
+        UserPermissionsPopup permObj = new UserPermissionsPopup();
+        permObj.displayPermissions();
+    }
 }
 
     

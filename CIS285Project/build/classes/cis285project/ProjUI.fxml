@@ -41,7 +41,7 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <ChoiceBox fx:id="activeTaskChoiceBox" layoutX="12.0" layoutY="2.0" prefHeight="25.0" prefWidth="230.0" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ChoiceBox fx:id="activeTaskChoiceBox" layoutX="12.0" layoutY="2.0" prefHeight="25.0" prefWidth="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <AnchorPane layoutX="130.0" layoutY="25.0" prefHeight="200.0" prefWidth="287.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
                                        <children>
                                           <GridPane layoutX="25.0" layoutY="25.0" prefHeight="51.0" prefWidth="253.0">
@@ -110,7 +110,7 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <ChoiceBox fx:id="completedTaskChoiceBox" layoutY="2.0" prefHeight="25.0" prefWidth="512.0" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ChoiceBox fx:id="completedTaskChoiceBox" layoutY="2.0" prefHeight="25.0" prefWidth="512.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                           <AnchorPane layoutY="24.0" prefHeight="391.0" prefWidth="506.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
                                              <children>
                                                 <GridPane layoutX="25.0" layoutY="25.0" prefHeight="51.0" prefWidth="253.0">
@@ -434,13 +434,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="User">
             <items>
-              <MenuItem mnemonicParsing="false" text="Sign In" />
-                  <MenuItem mnemonicParsing="false" text="Sign Out" />
+              <MenuItem fx:id="signInMenuItem" mnemonicParsing="false" onAction="#callSignInWindow" text="Sign In" />
+                  <MenuItem fx:id="signOutMenuItem" mnemonicParsing="false" text="Sign Out" />
+                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#closeApp" text="Exit" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="User Permissions" />
+                  <MenuItem fx:id="userPermissionsMenuItem" mnemonicParsing="false" onAction="#showUserPermissions" text="User Permissions" />
                </items>
             </Menu>
         </menus>
