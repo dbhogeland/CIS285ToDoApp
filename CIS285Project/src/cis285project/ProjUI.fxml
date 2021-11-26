@@ -435,7 +435,7 @@
           <Menu mnemonicParsing="false" text="User">
             <items>
               <MenuItem fx:id="signInMenuItem" mnemonicParsing="false" onAction="#callSignInWindow" text="Sign In" />
-                  <MenuItem fx:id="signOutMenuItem" mnemonicParsing="false" text="Sign Out" />
+                  <MenuItem fx:id="signOutMenuItem" mnemonicParsing="false" onAction="#signOut" text="Sign Out" />
                   <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#closeApp" text="Exit" />
             </items>
           </Menu>

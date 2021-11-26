@@ -19,11 +19,9 @@ import javafx.stage.*;
 public class SignIn {
     
     //-----------------------------------------------------
-    // These fields store the active user's ID and Role to be used by methods in the Controller
-    // They will be used by the initialize method to set the label at the bottom of the window,
-    // As well as the methods to pull the user's active and completed tasks from the database
-    private String userID = "test";
-    private String userRole = "test"; 
+    // These fields store the active user's ID and Role
+    private String userID;
+    private String userRole; 
     //-----------------------------------------------------
     
     
@@ -91,7 +89,7 @@ public class SignIn {
             setID(idInput);
             setRole(idInput);
             displaySuccess();
-            controllerObj.displayUserIDRole(idInput, getRole());
+            controllerObj.logIn(idInput, getRole());
         } else {
             displayWrongPass();
         }
@@ -125,6 +123,9 @@ public class SignIn {
         errorWindow.showAndWait();
     }
     
+    /*
+     * Method that displays a window confirms that the user is signed in
+     */
     public void displaySuccess(){
         Stage successWindow = new Stage();
         
@@ -157,7 +158,6 @@ public class SignIn {
         //Code to get role from database
            
         userRole = role;
-        System.out.println(userRole);
     }
     
     /*
@@ -172,7 +172,6 @@ public class SignIn {
      */
     public void setID(String id){
         userID = id;
-        System.out.println(userID);
     }
     
     /*

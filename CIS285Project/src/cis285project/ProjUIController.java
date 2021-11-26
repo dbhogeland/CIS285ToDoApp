@@ -149,7 +149,7 @@ public class ProjUIController {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
-        //userRoleLbl.setText("Please Sign In");
+        userRoleLbl.setText("Please Sign In");
     }
     
     /*
@@ -245,10 +245,14 @@ public class ProjUIController {
     }
     
     /*
-     * Void method to sign out the user - Daniel
+     * Void method to sign out the user and clear the lists of active and completed tasks - Daniel
      */
     public void signOut(ActionEvent event) {
-        // ToDo
+        activeTaskChoiceBox.getItems().clear();
+        completeCategoryListView.getItems().clear();
+        userID = "";
+        userRole = "";
+        userRoleLbl.setText("Please Sign In");
     }
     
     /*
@@ -269,7 +273,7 @@ public class ProjUIController {
     /*
      * Void method that retrieves and displays the user's ID and role in the label at the bottom of the screen
      */
-    public void displayUserIDRole(String id, String role) {
+    public void logIn(String id, String role) {
         SignIn signInObj = new SignIn();
         userID = id;
         userRole = role;
