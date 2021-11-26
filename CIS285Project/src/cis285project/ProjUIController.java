@@ -12,13 +12,14 @@ package cis285project;
  * 
  */
 
-/*
+
+// MySQL imports
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-*/
 
+// JavaFX imports
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -126,11 +127,14 @@ public class ProjUIController {
     @FXML private Button editBtn; // Button that edits the selected task if the user has permission
     @FXML private Button deleteBtn; // Button that deletes the selected task if the user has permission
     
+    // Variales for LocalDate 
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
    
-    //Connection con1; // Creates a variable for connection to MySQL database
-    //PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
+    // Variables for JDBC and MySQL database
+    private Connection con1; // Creates a variable for connection to MySQL database
+    private PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
+    private Statement st; // Creates a Statement for recieing data from the MySQL database
 
     ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); // List to store user roles for the choice box
     
@@ -148,6 +152,7 @@ public class ProjUIController {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
+        updateCatChoiceBox(); // update the choice box under task create with categories stored in database
     }
 
     
@@ -181,23 +186,23 @@ public class ProjUIController {
      */
     public void createTaskButtonClick(ActionEvent event) {
         
-        Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
+        Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(), 
                 startD, dueD);
         
         taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
         
-         
-        /*  For use with database marked out so it does not interfere with others running the program
-        try {
-            
+        try {          
             Class.forName("com.sun.jdi.connect.spi.Connection");
             
             con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
-            
-            insert = con1.prepareStatement("INSERT INTO task(task_name,task_short_desc,task_long_desc," // 
+            insert = con1.prepareStatement("INSERT INTO task(task_name,task_short_desc,task_long_desc," // Executes precompiled SQL statement
                     + "task_start_date,task_due_date,task_category)VALUES(?,?,?,?,?,?)"); 
             
-            insert.setString(1, taskObj.getTaskName());
+            /*
+             * Uses PreparedStatement equal to insert and adds the values in the corresponding columns for one row at a time 
+             * Int - Column number , String - data to enter
+            */
+            insert.setString(1, taskObj.getTaskName()); 
             insert.setString(2, taskObj.getTaskShortDesc());
             insert.setString(3, taskObj.getTaskLongDesc());
             insert.setString(4, taskObj.getStartDate());
@@ -206,19 +211,17 @@ public class ProjUIController {
             // insert.setString(7, taskObj.getTags()); For when we implement tags
             
             insert.executeUpdate();
+            insert.close();
             
             System.out.println("Successfully updated MySql server!");
             
-        } catch (ClassNotFoundException ex) {
-            
+        } catch (ClassNotFoundException ex) {         
             Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
             
-        } catch (SQLException ex) {
-            
-            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
-            
+        } catch (SQLException ex) { 
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);            
         }
-        */
+        
         
         // Temporary output statements to make sure input is doing what it needs to
 
@@ -245,9 +248,39 @@ public class ProjUIController {
         
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         
-        categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+        // categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+                                                                    // ****Remove comment if not using MySQL driver****
+        
+                
+        try {            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            
+            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
+            insert = con1.prepareStatement("INSERT INTO category(category)VALUES(?)"); // Executes precompiled SQL statement
+            
+            /*
+             * Uses PreparedStatement equal to insert and adds the values in the corresponding columns for one row at a time 
+             * Int - Column number , String - data to enter
+            */
+            insert.setString(1, catObj.getCategoryName()); 
+            
+            insert.executeUpdate(); 
+            updateCatChoiceBox(); // Creates a Statement for recieing data from the MySQL database
+            
+            insert.close();
+            
+            System.out.println("Successfully updated MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
         
         
+         
     }
     
     /*
@@ -273,7 +306,44 @@ public class ProjUIController {
         
     }
     
-
+    /*
+     * Void method that updates the category choice box select by getting the data 
+     * from the MySQL database in the category table.
+    */
+    public void updateCatChoiceBox() {
+        
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM category"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+                if (categorySelect.getItems().contains(rs.getString("category"))) { // If statement checks if categorySelect contains ResultSet rs to avoid duplicates
+                    
+                }
+                else { 
+                    String categoryName = rs.getString("category"); // Adds ResultSet rs to string categoryName
+                    categorySelect.getItems().add(categoryName); // Adds String categoryName to categorySelect choice box
+                }
+            }
+            
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    }
         
     
     
