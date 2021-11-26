@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
 import javafx.application.Platform;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -129,6 +130,8 @@ public class ProjUIController {
     
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
+    private String userID; //String variable to store the currently logged in User ID
+    private String userRole; // String variable to store the currently logged in User Role
     
     ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); // List to store user roles for the choice box
     
@@ -146,6 +149,7 @@ public class ProjUIController {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
+        //userRoleLbl.setText("Please Sign In");
     }
     
     /*
@@ -195,8 +199,8 @@ public class ProjUIController {
     /*
      * Void method that creates a category Object with the parameter categoryName
      * when the create category button is pressed
-     * Also, adds category name to Observable list on Category Class
-     *
+     * 
+     * Also, I added the ability for this method to add the created to the observable list for the active and completed category list views - Daniel
      */
     public void createCatButtonClick(ActionEvent event) {
         Category catObj = new Category(catNameTxtBox.getText());
@@ -233,34 +237,48 @@ public class ProjUIController {
     }
     
     /*
-     * Void method to call the sign in popup when the sign in menu item is clicked 
+     * Void method to call the sign in popup when the sign in menu item is clicked - Daniel
      */
     public void callSignInWindow(ActionEvent event) {
-        SignInPopup signInObj = new SignInPopup();
+        SignIn signInObj = new SignIn();
         signInObj.display();
     }
     
     /*
-     * Void method to sign out the user
+     * Void method to sign out the user - Daniel
      */
     public void signOut(ActionEvent event) {
         // ToDo
     }
     
     /*
-     * Void method that closes the application
+     * Void method that closes the application - Daniel
      */
     public void closeApp(ActionEvent event) {
         Platform.exit();
     }
     
     /*
-     * Void method to show a pop up that will show what each role is allowed to do
+     * Void method to show a pop up that will show what each role is allowed to do - Daniel
      */
     public void showUserPermissions(ActionEvent event) {
         UserPermissionsPopup permObj = new UserPermissionsPopup();
         permObj.displayPermissions();
     }
+    
+    /*
+     * Void method that retrieves and displays the user's ID and role in the label at the bottom of the screen
+     */
+    public void displayUserIDRole(String id, String role) {
+        SignIn signInObj = new SignIn();
+        userID = id;
+        userRole = role;
+        String output = userID + " - " + userRole;
+        System.out.println(output);
+        userRoleLbl.setText(output);
+    }
+    
+    
 }
 
     
