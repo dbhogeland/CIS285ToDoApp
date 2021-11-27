@@ -167,8 +167,8 @@ public class ProjUIController {
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
         userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
         
-        activeTaskChoiceBox.setOnAction(event-> setActiveLabels());
-        completedTaskChoiceBox.setOnAction(event-> setCompleteLabels());
+        activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
+        completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
     }
 
     
