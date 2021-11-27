@@ -28,12 +28,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
-import java.util.HashSet;
 import javafx.application.Platform;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
@@ -100,7 +98,7 @@ public class ProjUIController {
     
     // Active Tasks tab controls
     @FXML private ChoiceBox<String> activeTaskChoiceBox; // Choice box to select an active task
-    @FXML private Label activeTaskNamelbl; // Label that displays the name of the task
+    @FXML private Label activeTaskNameLbl; // Label that displays the name of the task
     @FXML private Label activeShortDescLbl; // Label that displays the short description of the task
     @FXML private TextArea activeLongDescTextArea; // Text area that displays the long description of the task
     @FXML private Label activeDueLbl; // Label that displays the due date of the task
@@ -123,6 +121,7 @@ public class ProjUIController {
     @FXML private Label completeDueLbl; // Label that displays the due date
     @FXML private Label completeStartLbl; // Label that displays the start date
     @FXML private Label completeCreatedLbl; // Label that displays the created date
+    @FXML private Label completeUpdatedLbl; // Label that displays the last updated date for the task
     @FXML private Label completeAssignedLbl; // Label that displays who assigned the task
     @FXML private CheckBox completeSelectedCheck; // Check box for selecting a task to delete
 
@@ -166,7 +165,10 @@ public class ProjUIController {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
-        userRoleLbl.setText("Please Sign In");
+        userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
+        
+        activeTaskChoiceBox.setOnAction(event-> setActiveLabels());
+        completedTaskChoiceBox.setOnAction(event-> setCompleteLabels());
     }
 
     
@@ -379,6 +381,52 @@ public class ProjUIController {
      */
     public void setRoleLbl(String output){
         userRoleLbl.setText(output);
+    }
+    
+    /*
+     * Method that updates the labels for the selected active task when called by the activeTaskChoiceBox listener
+     */
+    public void setActiveLabels(){
+        String title = "Task Name";
+        String shortDesc = "Short Description";
+        String longDesc = "Long Description";
+        String dueD = "Unassigned";
+        String startD = "Unassigned";
+        String createdD = "Unassigned";
+        String updated = "Unassigned";
+        String assignedBy = "Unassigned";
+        
+        activeTaskNameLbl.setText(title);
+        activeShortDescLbl.setText(shortDesc);
+        activeLongDescTextArea.setText(longDesc);
+        activeDueLbl.setText(dueD);
+        activeStartLbl.setText(startD);
+        activeCreatedLbl.setText(createdD);
+        activeUpdatedLbl.setText(updated);
+        activeAssignedLbl.setText(assignedBy);
+    }
+    
+    /*
+     * Method that updates the labels for the selected completed task when called by the completedTaskChoiceBox listener
+     */
+    public void setCompleteLabels(){
+        String title = "Task Name";
+        String shortDesc = "Short Description";
+        String longDesc = "Long Description";
+        String dueD = "Unassigned";
+        String startD = "Unassigned";
+        String createdD = "Unassigned";
+        String updated = "Unassigned";
+        String assignedBy = "Unassigned";
+        
+        completeTaskNameLbl.setText(title);
+        completeShortDescLbl.setText(shortDesc);
+        completeLongDescArea.setText(longDesc);
+        completeDueLbl.setText(dueD);
+        completeStartLbl.setText(startD);
+        completeCreatedLbl.setText(createdD);
+        completeUpdatedLbl.setText(updated);
+       completeAssignedLbl.setText(assignedBy);
     }
 }
 
