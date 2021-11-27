@@ -4,8 +4,7 @@
  */
 package cis285project;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.time.LocalDate;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,8 +24,26 @@ import javafx.stage.Stage;
  */
 public class EditTask {
     
-    private ObservableList<String> categoriesList = FXCollections.observableArrayList();
+    private Label titleLbl = new Label("Title:");
+    private Label shortDescLbl = new Label("Short Description:");
+    private Label longDescLbl = new Label("Description:");
+    private Label startLbl = new Label("Start:");
+    private Label dueLbl = new Label("Due:");
+    private Label assignLbl = new Label("Assign to:");
+    private Label categoryLbl = new Label("Category:");
+    private TextField titleTxt = new TextField();
+    private TextField shortTxt = new TextField();
+    private TextArea longArea = new TextArea();
+    private DatePicker startDp = new DatePicker();
+    private DatePicker dueDp = new DatePicker();
+    private TextField assignTxt = new TextField();
+    public ChoiceBox<String> categoryCh = new ChoiceBox<String>();
+    private Button editBtn = new Button("Edit");
     
+    
+    /*
+     * Method to display that edit task window
+     */
     public void display(){
         
         Stage editWindow = new Stage();
@@ -34,25 +51,8 @@ public class EditTask {
         editWindow.initModality(Modality.APPLICATION_MODAL); // Makes it so that when the popup window is visible, the user cannot interact with the main application
         editWindow.setTitle("Edit Task");
         
-        Label titleLbl = new Label("Title:");
-        Label shortDescLbl = new Label("Short Description:");
-        Label longDescLbl = new Label("Description:");
-        Label startLbl = new Label("Start:");
-        Label dueLbl = new Label("Due:");
-        Label assignLbl = new Label("Assign to:");
-        Label categoryLbl = new Label("Category:");
-        TextField titleTxt = new TextField();
-        TextField shortTxt = new TextField();
-        TextArea longArea = new TextArea("Long Description");
-        DatePicker startDp = new DatePicker();
-        DatePicker dueDp = new DatePicker();
-        TextField assignTxt = new TextField();
-        ChoiceBox<String> categoryCh = new ChoiceBox<String>();
-        Button editBtn = new Button("Edit");
-        
         longArea.setPrefWidth(200);
         longArea.setWrapText(true);
-        categoryCh.setItems(categoriesList);
         
         editBtn.setOnAction(e-> editInfo());
         
@@ -88,11 +88,59 @@ public class EditTask {
         editWindow.showAndWait();
     }
     
-    public void addToCatList(String cat){
-        categoriesList.add(cat);
-    }
-    
+    /*
+     * Method to edit the details that have been entered.
+     * This method checks each field to see if there is input. If there is not new information entered,
+     * the data will not be updated in the database.
+     */
     public void editInfo(){
+        // Checks title field
+        if(titleTxt.getText() != null && !titleTxt.getText().trim().isEmpty()){
+            String newTitle = titleTxt.getText();
+            System.out.println("title test");
+            // Needs database code to update data
+        }
+        
+        // Checks short description field
+        if(shortTxt.getText() != null && !shortTxt.getText().trim().isEmpty()){
+            String newShort = shortTxt.getText();
+            System.out.println("short test");
+            // Needs database code to update data
+        }
+        
+        // Checks long description field
+        if(longArea.getText().trim() != ""){
+            String newLong = longArea.getText();
+            System.out.println("long test");
+            // Needs database code to update data
+        }
+        
+        // Checks due date picker
+        LocalDate dueDate = dueDp.getValue();
+        if(dueDate != null){
+            System.out.println("due test");
+            // Needs database code to update data
+        }
+        
+        // Checks start date picker
+        LocalDate startDate = startDp.getValue();
+        if(startDate != null){
+            System.out.println("start test");
+            // Needs database code to update data
+        }
+        
+        //Checks assigned to field
+        if(assignTxt.getText() != null && !assignTxt.getText().trim().isEmpty()){
+            String newAssign = assignTxt.getText();
+            System.out.println("assign test");
+            // Needs database code to update data
+        }
+        
+        // Checks the choicebox selection
+        if(categoryCh.getValue() != null){
+            String newCat = categoryCh.getValue();
+            // Needs database code to update data
+        }
         
     }
 }

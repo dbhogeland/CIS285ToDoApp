@@ -53,8 +53,8 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label fx:id="activeTaskNameLbl" text="Task Name" />
-                                                <Label fx:id="activeShortDescLbl" text="Short Description" GridPane.rowIndex="1" />
+                                                <Label fx:id="activeTaskNameLbl" prefHeight="17.0" prefWidth="251.0" text="Task Name" />
+                                                <Label fx:id="activeShortDescLbl" prefHeight="17.0" prefWidth="252.0" text="Short Description" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                           <TextArea fx:id="activeLongDescTextArea" editable="false" layoutX="25.0" layoutY="87.0" prefHeight="303.0" prefWidth="254.0" text="Long Description" />
@@ -76,11 +76,11 @@
                                                 <Label text="Created:" GridPane.rowIndex="2" />
                                                 <Label text="Updated:" GridPane.rowIndex="3" />
                                                 <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                <Label fx:id="activeDueLbl" text="Label" GridPane.columnIndex="1" />
-                                                <Label fx:id="activeStartLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label fx:id="activeCreatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label fx:id="activeUpdatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label fx:id="activeAssignedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label fx:id="activeDueLbl" text="Unassigned" GridPane.columnIndex="1" />
+                                                <Label fx:id="activeStartLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="activeCreatedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="activeUpdatedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label fx:id="activeAssignedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                              </children>
                                           </GridPane>
                                           <CheckBox fx:id="activeCompletedCheck" layoutX="292.0" layoutY="252.0" mnemonicParsing="false" text="Completed" />
@@ -122,8 +122,8 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <Label fx:id="completeTaskNameLbl" text="Task Name" />
-                                                      <Label fx:id="completeShortDescLbl" text="Short Description" GridPane.rowIndex="1" />
+                                                      <Label fx:id="completeTaskNameLbl" prefHeight="17.0" prefWidth="252.0" text="Task Name" />
+                                                      <Label fx:id="completeShortDescLbl" prefHeight="17.0" prefWidth="251.0" text="Short Description" GridPane.rowIndex="1" />
                                                    </children>
                                                 </GridPane>
                                                 <TextArea fx:id="completeLongDescTextArea" editable="false" layoutX="25.0" layoutY="87.0" prefHeight="303.0" prefWidth="254.0" text="Long Description" />
@@ -145,11 +145,11 @@
                                                       <Label text="Created:" GridPane.rowIndex="2" />
                                                       <Label text="Updated:" GridPane.rowIndex="3" />
                                                       <Label text="Assigned by:" GridPane.rowIndex="4" />
-                                                      <Label fx:id="completeDueLbl" text="Label" GridPane.columnIndex="1" />
-                                                      <Label fx:id="completeStartLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                      <Label fx:id="completeCreatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                      <Label fx:id="completeUpdatedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                      <Label fx:id="completeAssignedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <Label fx:id="completeDueLbl" text="Unassigned" GridPane.columnIndex="1" />
+                                                      <Label fx:id="completeStartLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="completeCreatedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="completeUpdatedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="completeAssignedLbl" text="Unassigned" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                    </children>
                                                 </GridPane>
                                                 <CheckBox fx:id="completeSelectedCheck" layoutX="292.0" layoutY="248.0" mnemonicParsing="false" text="Selected" />

@@ -28,19 +28,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
-
 import javafx.application.Platform;
-import javafx.beans.property.StringProperty;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
-
 import javafx.scene.control.MenuItem;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
@@ -138,6 +133,7 @@ public class ProjUIController {
     @FXML private Button editBtn; // Button that edits the selected task if the user has permission
     @FXML private Button deleteBtn; // Button that deletes the selected task if the user has permission
     
+    // Menu items located on the top menu bar
     @FXML private MenuItem signInMenuItem; // Menu Item to call the sign in popup window
     @FXML private MenuItem signOutMenuItem; // Menu Item to sign out the user
     @FXML private MenuItem exitMenuItem; // Menu Item that will close the application
@@ -151,8 +147,9 @@ public class ProjUIController {
     //Connection con1; // Creates a variable for connection to MySQL database
     //PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
 
-
-    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); // List to store user roles for the choice box
+    // List to store user roles for the choice box
+    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
+    
     
     /*
     *
@@ -265,7 +262,7 @@ public class ProjUIController {
         completeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the completed list view
         activeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the active list view
         categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
-        editObj.addToCatList(catObj.getCategoryName());
+        editObj.categoryCh.getItems().add(catObj.getCategoryName());
         
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         

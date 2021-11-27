@@ -10,10 +10,7 @@ package cis285project;
  * @author Jason
  */
 
-import java.util.List;
-import java.util.ArrayList;
 import javafx.collections.ObservableList;
-import javafx.collections.ListChangeListener;
 import javafx.collections.FXCollections;
 
 public class Category {
