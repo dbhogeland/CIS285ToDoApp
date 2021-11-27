@@ -28,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
+import java.util.HashSet;
 import javafx.application.Platform;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -198,7 +199,6 @@ public class ProjUIController {
      * passed into the task Object parameters.
      */
     public void createTaskButtonClick(ActionEvent event) {
-        
         Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
                 startD, dueD);
         
@@ -244,7 +244,6 @@ public class ProjUIController {
         System.out.println(taskObj.getCategoryTag());
         
         clearCreateTaskInfo(); // Calls method that clears textfields and datepickers value when createTaskButton is Clicked
-        
     }
     
     /*
@@ -254,7 +253,6 @@ public class ProjUIController {
      * Also, I added the ability for this method to add the created to the observable list for the active and completed category list views - Daniel
      */
     public void createCatButtonClick(ActionEvent event) {
-        
         Category catObj = new Category(catNameTxtBox.getText());
         EditTask editObj = new EditTask();
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
@@ -262,36 +260,28 @@ public class ProjUIController {
         completeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the completed list view
         activeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the active list view
         categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
-        editObj.categoryCh.getItems().add(catObj.getCategoryName());
+        editObj.categoryCh.getItems().add(catObj.getCategoryName()); // Adds items to the category choice box on the edit page
         
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
-        
-        
-        
-        
     }
     
     /*
      * Void method that clears the input values of creatTask textfields and DatePickers
      */
     public void clearCreateTaskInfo() {
-        
         titleTxtBox.clear();
         shortDescTxtBox.clear();
         longDescTxtBox.clear();
         startDatePicker.getEditor().clear();
         dueDatePicker.getEditor().clear();
         // categorySelect.getItems().clear();
-        
     }
     
     /*
      * Void method that clears category textfield
      */
     public void clearCategoryInfo() {
-        
         catNameTxtBox.clear();
-        
     }
     
     /*
@@ -328,28 +318,34 @@ public class ProjUIController {
         permObj.displayPermissions();
     }
     
-    
-    
+    /*
+     * Method to update the completed value on the database for the selected task
+     */
     public void completeTask(){
         if(activeCompletedCheck.isSelected()){
+            String completedTask;
+            int index = activeTaskChoiceBox.getSelectionModel().getSelectedIndex();
+            completedTask = activeTaskChoiceBox.getValue();
             //ToDo
+            //Need to add completed column to task database with a boolean data type
             //Needs database code to set task as completed
+            
+            activeTaskChoiceBox.getItems().remove(index);
         }
     }
     
     public void editTask(){
         EditTask edit = new EditTask();
-        String task;
         
         if(activeSelectedCheck.isSelected()){
-            task = activeTaskChoiceBox.getValue();
+            edit.setTaskToEdit(activeTaskChoiceBox.getValue());
             edit.display();
             //Will include a call to the display() method of the EditTask class so that the user can make changes
             //Needs database code to edit the selected task
         }
         
         if(completeSelectedCheck.isSelected()){
-            task = completedTaskChoiceBox.getValue();
+            edit.setTaskToEdit(completedTaskChoiceBox.getValue());
             edit.display();
             //Will include a call to the display() method of the EditTask class so that the user can make changes
             //Needs database code to edit the selected task
@@ -359,15 +355,21 @@ public class ProjUIController {
     public void deleteTask(){
         String task;
         if(activeSelectedCheck.isSelected()){
+            int index = activeTaskChoiceBox.getSelectionModel().getSelectedIndex();
             task = activeTaskChoiceBox.getValue();
             
             //Needs database code to delete selected task
+            
+            activeTaskChoiceBox.getItems().remove(index);
         }
         
         if(completeSelectedCheck.isSelected()){
+            int index = completedTaskChoiceBox.getSelectionModel().getSelectedIndex();
             task = completedTaskChoiceBox.getValue();
-            
+
             //Needs database code to delete selected task
+            
+            completedTaskChoiceBox.getItems().remove(index);
         }
     }
     
