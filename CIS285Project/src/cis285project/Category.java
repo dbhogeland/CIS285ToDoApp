@@ -10,13 +10,9 @@ package cis285project;
  * @author Jason
  */
 
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-
 public class Category {
     
     private String categoryName; // String to hold the name of a Category
-    private ObservableList<String> categoriesList = FXCollections.observableArrayList();
     
     public Category(String cN){ // Constructor that takes cN as a parameter and sets it equal to categoryName
         categoryName = cN;

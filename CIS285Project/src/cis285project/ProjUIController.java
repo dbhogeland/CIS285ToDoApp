@@ -390,17 +390,19 @@ public class ProjUIController {
         String title = "Task Name";
         String shortDesc = "Short Description";
         String longDesc = "Long Description";
-        String dueD = "Unassigned";
-        String startD = "Unassigned";
+        String dueDate = "Unassigned";
+        String startDate = "Unassigned";
         String createdD = "Unassigned";
         String updated = "Unassigned";
         String assignedBy = "Unassigned";
         
+        // Needs code to pull from database
+        
         activeTaskNameLbl.setText(title);
         activeShortDescLbl.setText(shortDesc);
         activeLongDescTextArea.setText(longDesc);
-        activeDueLbl.setText(dueD);
-        activeStartLbl.setText(startD);
+        activeDueLbl.setText(dueDate);
+        activeStartLbl.setText(startDate);
         activeCreatedLbl.setText(createdD);
         activeUpdatedLbl.setText(updated);
         activeAssignedLbl.setText(assignedBy);
@@ -413,17 +415,19 @@ public class ProjUIController {
         String title = "Task Name";
         String shortDesc = "Short Description";
         String longDesc = "Long Description";
-        String dueD = "Unassigned";
-        String startD = "Unassigned";
+        String dueDate = "Unassigned";
+        String startDate = "Unassigned";
         String createdD = "Unassigned";
         String updated = "Unassigned";
         String assignedBy = "Unassigned";
         
+        // Needs code to pull from database
+        
         completeTaskNameLbl.setText(title);
         completeShortDescLbl.setText(shortDesc);
         completeLongDescArea.setText(longDesc);
-        completeDueLbl.setText(dueD);
-        completeStartLbl.setText(startD);
+        completeDueLbl.setText(dueDate);
+        completeStartLbl.setText(startDate);
         completeCreatedLbl.setText(createdD);
         completeUpdatedLbl.setText(updated);
        completeAssignedLbl.setText(assignedBy);

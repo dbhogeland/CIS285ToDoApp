@@ -39,6 +39,7 @@ public class EditTask {
     private TextField assignTxt = new TextField();
     public ChoiceBox<String> categoryCh = new ChoiceBox<String>();
     private Button editBtn = new Button("Edit");
+    private String taskToEdit;
     
     
     /*
@@ -54,7 +55,7 @@ public class EditTask {
         longArea.setPrefWidth(200);
         longArea.setWrapText(true);
         
-        editBtn.setOnAction(e-> editInfo());
+        editBtn.setOnAction(e-> editTask());
         
         HBox hbox1 = new HBox(4);
         HBox hbox2 = new HBox(4);
@@ -93,7 +94,7 @@ public class EditTask {
      * This method checks each field to see if there is input. If there is not new information entered,
      * the data will not be updated in the database.
      */
-    public void editInfo(){
+    public void editTask(){
         // Checks title field
         if(titleTxt.getText() != null && !titleTxt.getText().trim().isEmpty()){
             String newTitle = titleTxt.getText();
@@ -109,7 +110,7 @@ public class EditTask {
         }
         
         // Checks long description field
-        if(longArea.getText().trim() != ""){
+        if(!longArea.getText().trim().equals("")){
             String newLong = longArea.getText();
             System.out.println("long test");
             // Needs database code to update data
@@ -142,5 +143,26 @@ public class EditTask {
             // Needs database code to update data
         }
         
+    }
+    
+    /*
+     * Constructor for taskToEdit
+     */
+    public void EditTask(String task){
+        taskToEdit = task;
+    }
+    
+    /*
+     * Setter for setTaskToEdit
+     */
+    public void setTaskToEdit(String task){
+        taskToEdit = task;
+    }
+    
+    /*
+     * Getter for setTaskToEdit
+     */
+    public String getTaskToEdit(){
+        return taskToEdit;
     }
 }
