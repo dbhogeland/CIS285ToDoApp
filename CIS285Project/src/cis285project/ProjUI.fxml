@@ -23,6 +23,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis285project.ProjUIController">
    <children>
@@ -187,7 +188,7 @@
                               <TextField fx:id="shortDescTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <GridPane layoutX="433.0" layoutY="86.0" prefHeight="90.0" prefWidth="224.0">
+                        <GridPane layoutX="433.0" layoutY="86.0" prefHeight="116.0" prefWidth="224.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="58.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
@@ -196,6 +197,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label text="Start:" />
@@ -204,9 +206,11 @@
                               <TextField fx:id="assignTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <DatePicker fx:id="startDatePicker" onAction="#setStartDate" GridPane.columnIndex="1" />
                               <DatePicker fx:id="dueDatePicker" onAction="#setDueDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Tags:" GridPane.rowIndex="3" />
+                              <TextField fx:id="tagsTxtBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
-                        <GridPane layoutX="445.0" layoutY="215.0" prefHeight="40.0" prefWidth="200.0">
+                        <GridPane layoutX="445.0" layoutY="225.0" prefHeight="40.0" prefWidth="200.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="56.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="144.0" />
@@ -224,6 +228,11 @@
                         <Label layoutX="142.0" layoutY="375.0" text="Category:" />
                         <TextField fx:id="catNameTxtBox" layoutX="234.0" layoutY="371.0" />
                         <Button fx:id="createCatButton" layoutX="508.0" layoutY="371.0" mnemonicParsing="false" onAction="#createCatButtonClick" text="Create Category" />
+                        <Label layoutX="508.0" layoutY="202.0" text="Separate tags with a comma" textAlignment="CENTER">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>

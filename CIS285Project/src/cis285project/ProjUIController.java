@@ -55,6 +55,7 @@ public class ProjUIController {
     @FXML private TextField shortDescTxtBox; // Text field for the short description of a task
     @FXML private DatePicker startDatePicker; // Set the start date of a task
     @FXML private TextField titleTxtBox; // Text field for the title of a task
+    @FXML private TextField tagsTxtBox; // Text field for the task's tags
 
     
     
@@ -202,9 +203,10 @@ public class ProjUIController {
      */
     public void createTaskButtonClick(ActionEvent event) {
         Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
-                startD, dueD);
+                startD, dueD, tagsTxtBox.getText());
         
         taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
+
         
          
         /*  For use with database marked out so it does not interfere with others running the program
@@ -430,7 +432,7 @@ public class ProjUIController {
         completeStartLbl.setText(startDate);
         completeCreatedLbl.setText(createdD);
         completeUpdatedLbl.setText(updated);
-       completeAssignedLbl.setText(assignedBy);
+        completeAssignedLbl.setText(assignedBy);
     }
 }
 

@@ -5,9 +5,11 @@
  */
 package cis285project;
 
+
 /**
  *
  * @author Jason
+ * Added to by Daniel
  */
 
 public class Task {
@@ -18,27 +20,26 @@ public class Task {
     private String startDate; // String variable for start date of a task. Can be converted to int if needed.
     private String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
     private String categoryTag; // String variable for category tag to group task later on.
-    private String customTag; // String varaible for tags for specific task ***** Needs to be implemented in UI *****
+    private String taskTags; // String field to store the tags input as a whole
+    
     /*
      * Constructor for basic Task
      * information that the user will provide 
      */
-    public Task(String tN, String tSD, String tLD, String sD, String dD){
-        
-        
+    public Task(String tN, String tSD, String tLD, String sD, String dD, String tags){
         this.taskName = tN;
         this.taskShortDesc = tSD;
         this.taskLongDesc = tLD;
         this.startDate = sD;
         this.dueDate = dD;
         this.categoryTag = "";
-        
-    
+        this.taskTags = tags;
     }
     
     public void setTaskName(String tN){ // Method for setting task name/title
         taskName = tN;
     }
+    
     public String getTaskName(){ // Method for retrieving task name/title
         return taskName;
     }
@@ -79,4 +80,17 @@ public class Task {
         return categoryTag;
     }
     
+    /*
+     * Method for setting the task tags
+     */
+    public void setTaskTags(String tI){
+        taskTags = tI;
+    }
+    
+    /*
+     * Method for getting the task tags
+     */
+    public String getTaskTags(){
+        return taskTags;
+    }
 }

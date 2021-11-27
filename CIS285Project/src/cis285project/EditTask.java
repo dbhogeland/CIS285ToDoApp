@@ -39,6 +39,8 @@ public class EditTask {
     private TextField assignTxt = new TextField();
     public ChoiceBox<String> categoryCh = new ChoiceBox<String>();
     private Button editBtn = new Button("Edit");
+    private Label tagsLbl = new Label("Add Tags:");
+    private TextField tagsTxt = new TextField();
     private String taskToEdit;
     
     
@@ -54,6 +56,7 @@ public class EditTask {
         
         longArea.setPrefWidth(200);
         longArea.setWrapText(true);
+        tagsTxt.setPromptText("Separate with commas");
         
         editBtn.setOnAction(e-> editTask());
         
@@ -65,6 +68,7 @@ public class EditTask {
         HBox hbox6 = new HBox(4);
         HBox hbox7 = new HBox(4);
         HBox hbox8 = new HBox(30);
+        HBox hbox9 = new HBox(4);
         VBox vbox1 = new VBox(15);
         VBox vbox2 = new VBox(15);
         
@@ -75,8 +79,9 @@ public class EditTask {
         hbox5.getChildren().addAll(dueLbl, dueDp);
         hbox6.getChildren().addAll(assignLbl, assignTxt);
         hbox7.getChildren().addAll(categoryLbl, categoryCh);
+        hbox9.getChildren().addAll(tagsLbl, tagsTxt);
         vbox1.getChildren().addAll(hbox1, hbox2, hbox3);
-        vbox2.getChildren().addAll(hbox4, hbox5, hbox6, hbox7, editBtn);
+        vbox2.getChildren().addAll(hbox4, hbox5, hbox6, hbox7, hbox9, editBtn);
         hbox8.getChildren().addAll(vbox1, vbox2);
         
         vbox1.setAlignment(Pos.CENTER);
@@ -143,6 +148,16 @@ public class EditTask {
             // Needs database code to update data
         }
         
+        //Checks add tags field
+        if(tagsTxt.getText() != null && !tagsTxt.getText().trim().isEmpty()){
+            String newTags = tagsTxt.getText();
+            String oldTags = ""; // Remove initialization when database code is implemented
+            String allTags;
+            
+            allTags = oldTags + " ," + newTags;
+            
+            // Needs database code to replace tags in database with the all tags variable
+        }
     }
     
     /*
