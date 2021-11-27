@@ -89,7 +89,7 @@ public class SignIn {
             setID(idInput);
             setRole(idInput);
             displaySuccess();
-            controllerObj.logIn(idInput, getRole());
+            logIn();
         } else {
             displayWrongPass();
         }
@@ -181,5 +181,13 @@ public class SignIn {
         return userID;
     }
     
-    
+    /*
+     * Method for sending a string to the setRoleLbl method in the controller
+     */
+    public void logIn() {
+        ProjUIController controlObj = new ProjUIController();
+        String output = userID + " - " + userRole;
+        System.out.println(output);
+        controlObj.setRoleLbl(output);
+    }
 }

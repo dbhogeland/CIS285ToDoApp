@@ -148,7 +148,6 @@ public class ProjUIController {
 
     private String userID; //String variable to store the currently logged in User ID
     private String userRole; // String variable to store the currently logged in User Role
-   
     //Connection con1; // Creates a variable for connection to MySQL database
     //PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
 
@@ -260,14 +259,17 @@ public class ProjUIController {
     public void createCatButtonClick(ActionEvent event) {
         
         Category catObj = new Category(catNameTxtBox.getText());
+        EditTask editObj = new EditTask();
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
         
         completeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the completed list view
         activeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the active list view
+        categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+        editObj.addToCatList(catObj.getCategoryName());
         
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         
-        categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+        
         
         
     }
@@ -329,19 +331,56 @@ public class ProjUIController {
         permObj.displayPermissions();
     }
     
-    /*
-     * Void method that retrieves and displays the user's ID and role in the label at the bottom of the screen
-     */
-    public void logIn(String id, String role) {
-        SignIn signInObj = new SignIn();
-        userID = id;
-        userRole = role;
-        String output = userID + " - " + userRole;
-        System.out.println(output);
-        userRoleLbl.setText(output);
+    
+    
+    public void completeTask(){
+        if(activeCompletedCheck.isSelected()){
+            //ToDo
+            //Needs database code to set task as completed
+        }
     }
     
+    public void editTask(){
+        EditTask edit = new EditTask();
+        String task;
+        
+        if(activeSelectedCheck.isSelected()){
+            task = activeTaskChoiceBox.getValue();
+            edit.display();
+            //Will include a call to the display() method of the EditTask class so that the user can make changes
+            //Needs database code to edit the selected task
+        }
+        
+        if(completeSelectedCheck.isSelected()){
+            task = completedTaskChoiceBox.getValue();
+            edit.display();
+            //Will include a call to the display() method of the EditTask class so that the user can make changes
+            //Needs database code to edit the selected task
+        }
+    }
     
+    public void deleteTask(){
+        String task;
+        if(activeSelectedCheck.isSelected()){
+            task = activeTaskChoiceBox.getValue();
+            
+            //Needs database code to delete selected task
+        }
+        
+        if(completeSelectedCheck.isSelected()){
+            task = completedTaskChoiceBox.getValue();
+            
+            //Needs database code to delete selected task
+        }
+    }
+    
+    /*
+     * Method for changing the UserID - Role label
+     * Doesn't work for some reason
+     */
+    public void setRoleLbl(String output){
+        userRoleLbl.setText(output);
+    }
 }
 
     

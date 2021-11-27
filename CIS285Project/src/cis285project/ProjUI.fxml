@@ -391,7 +391,7 @@
       </TabPane>
       <ButtonBar layoutX="419.0" layoutY="458.0" prefHeight="40.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="419.0" AnchorPane.rightAnchor="14.0">
         <buttons>
-            <Button fx:id="completeBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="completeBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false" onAction="#completeTask">
                <tooltip>
                   <Tooltip text="Completes Checked Tasks" />
                </tooltip>
@@ -403,7 +403,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="editBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="editBtn" layoutX="640.0" layoutY="18.0" mnemonicParsing="false" onAction="#editTask">
                <tooltip>
                   <Tooltip text="Edits Selected Tasks" />
                </tooltip>
@@ -415,7 +415,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="deleteBtn" layoutX="385.0" layoutY="18.0" mnemonicParsing="false">
+            <Button fx:id="deleteBtn" layoutX="385.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteTask">
                <tooltip>
                   <Tooltip text="Deletes Selected Tasks" />
                </tooltip>
