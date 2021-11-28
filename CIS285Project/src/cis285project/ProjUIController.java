@@ -33,6 +33,8 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -182,11 +184,11 @@ public class ProjUIController {
     private void initialize() {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
-        activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
-
+        //activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list ** MIGHT NEED TO REMOVE ALL RELATED CODE**
+        updateActiveCategoryLV();
         //userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
         
-        activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
+        //activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
         completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
 
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
@@ -319,7 +321,7 @@ public class ProjUIController {
             
             insert.executeUpdate(); 
             updateCatChoiceBox(); // Creates a Statement for recieing data from the MySQL database
-            
+            updateActiveCategoryLV(); // Updates the category listview in the active task tab
             insert.close();
             
             System.out.println("Successfully updated MySql server!");
@@ -491,6 +493,116 @@ public class ProjUIController {
      */
     public void setRoleLbl(String output){
         myControllerHandle.userRoleLbl.setText(output);
+    }
+    
+    /*
+     * Void method for retrieving list of categorys from the database and updating
+     * the active task tab category listview
+     */
+    public void updateActiveCategoryLV() {
+               
+        
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM category"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+                if (activeCategoryListView.getItems().contains(rs.getString("category"))) { // Checks for repeats of a category
+                    
+                }
+                else { 
+                    String activeCatLV = rs.getString("category"); // Adds ResultSet rs to string activeCatLV
+                    activeCategoryListView.getItems().add(activeCatLV);  // Adds the category to the listview
+                }
+            }
+         
+            
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled ActiveCategory from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        /*
+         * Gets the active category listview and sets the selected item into a variable and updates the choicebox based on the selection
+         */
+        activeCategoryListView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> { 
+            String selectedItem = activeCategoryListView.getSelectionModel().getSelectedItem(); 
+            String prevSelectedItem = selectedItem;
+            
+            // If statment to determine whether the current selected listview item is the same and either leaves or deletes current choicebox options
+            if (!prevSelectedItem.equals(selectedItem)) {
+                System.out.println(activeTaskChoiceBox.getItems());
+                updateActiveTaskChoiceBox(selectedItem, currentUser, true); // Updates choicebox
+            }
+            else {
+                
+                activeTaskChoiceBox.getItems().clear(); // clears choicebox
+                System.out.println(activeTaskChoiceBox.getItems());
+                updateActiveTaskChoiceBox(selectedItem, currentUser, true); // Updates choicebox
+            }
+            
+        });
+        
+    }
+    
+    /*
+     * Void method for updateding active task choicebox from database based on criteria such as user signed in,
+     * task category, task is active 
+    */
+    public void updateActiveTaskChoiceBox(String c, String u, Boolean t) {
+   
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM task"); // Execute the query and get the java resultset
+            
+            // While loop for iterating through ResultSet
+            while (rs.next()) {
+                
+                // If statement checks to see if database table contains the following: category, username, active status
+                if (rs.getString("task_category").equalsIgnoreCase(c) && rs.getString("username").equalsIgnoreCase(u) &&
+                        rs.getBoolean("is_active") == true) { 
+                    
+                    // If statement checks to see if active task choice box already contains task name to avoid adding duplicates
+                    if (activeTaskChoiceBox.getItems().contains(rs.getString("task_name"))) {
+                        
+                    }
+                    else {
+                        String activeCatLV = rs.getString("task_name"); // Adds ResultSet rs to string activeCatLV
+                        activeTaskChoiceBox.getItems().add(activeCatLV);  // Adds the task to the choicebox
+                    }
+                    
+                }
+                
+            }
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled ActiveCategory from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
     }
     
     /*

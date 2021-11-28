@@ -199,8 +199,7 @@ public class SignIn {
     public void currentUser() {
         ProjUIController controlObj = new ProjUIController();
         controlObj.setCurrentUser(getID());
-        //System.out.println(getID());
-        System.out.println("Current User Test");
+        
     }
     
     
