@@ -90,6 +90,7 @@ public class SignIn {
             setRole(idInput);
             displaySuccess();
             logIn();
+            setPermissions();
         } else {
             displayWrongPass();
         }
@@ -189,5 +190,27 @@ public class SignIn {
         String output = userID + " - " + userRole;
         //System.out.println(output);
         controlObj.setRoleLbl(output);
+    }
+    
+    public void setPermissions(){
+        if (userRole.equals("Admin")){
+            
+        }
+        
+        if (userRole.equals("Manage")){
+            
+        }
+        
+        if (userRole.equals("Update")){
+            
+        }
+        
+        if (userRole.equals("Edit")){
+            
+        }
+        
+        if (userRole.equals("Read")){
+            
+        }
     }
 }

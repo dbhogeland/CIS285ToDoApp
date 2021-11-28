@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
 //import java.util.HashSet;
@@ -58,6 +59,8 @@ public class ProjUIController {
     @FXML private DatePicker startDatePicker; // Set the start date of a task
     @FXML private TextField titleTxtBox; // Text field for the title of a task
     @FXML private TextField tagsTxtBox; // Text field for the task's tags
+    @FXML private Tab createTab;
+    
 
     
     
@@ -70,13 +73,13 @@ public class ProjUIController {
     @FXML private TextField stateTxtBox; // Text field for User state
     @FXML private TextField phoneTxtBox; // Text field for user Phone
     @FXML private Button updateUser; // Button to update User information
+    @FXML private Tab accountManageTab;
 
     
     
     // Account Management tab controls
     // Admin only controls
     @FXML private TextField adminUserTxtBox; // Text Field for User ID
-    @FXML private TextField adminOldPassTxtBox; // Text field for Old Password
     @FXML private TextField adminNewPassTxtBox; // Text field for new password
     @FXML private TextField adminStreetTxtBox; // Text field for User Street
     @FXML private TextField adminCityTxtBox; // Text field for User City
@@ -96,6 +99,7 @@ public class ProjUIController {
     @FXML private TextField createPhoneTxtBox; // Text field for User Phone
     @FXML private Button createUserBtn; // Button to create a new user profile
     @FXML private ChoiceBox<String> userRoleChoiceBox; // Choice box to select a role for the user
+    @FXML private Tab userCreateTab;
 
     
     
@@ -464,9 +468,7 @@ public class ProjUIController {
      * Doesn't work for some reason
      */
     public void setRoleLbl(String output){
-        System.out.println(output);
         userRoleLbl.setText(output);
-        
     }
     
     /*
@@ -517,6 +519,60 @@ public class ProjUIController {
         completeCreatedLbl.setText(createdD);
         completeUpdatedLbl.setText(updated);
         completeAssignedLbl.setText(assignedBy);
+    }
+    
+    /*
+     * Method that enables UI features based on the active user's role
+     * Application launches with features disabled based on a user with the role of Read
+     * When the user signs in the if statements will test against the user's role and unlock features accordingly
+     */
+    public void setPermissions(){
+       /*
+        Code is currently commented out until full sign in functionality is implemented
+        
+        if (userRole.equals("Admin")){
+            activeCompletedCheck.setDisable(false);
+            activeSelectedCheck.setDisable(false);
+            completeSelectedCheck.setDisable(false);
+            createTab.setDisable(false);
+            accountManageTab.setDisable(false);
+            userCreateTab.setDisable(false); 
+            adminUserTxtBox.setDisable(false);
+            adminNewPassTxtBox.setDisable(false);
+            adminStreetTxtBox.setDisable(false);
+            adminCityTxtBox.setDisable(false);
+            adminStateTxtBox.setDisable(false);
+            adminPhoneTxtBox.setDisable(false);
+            completeBtn.setDisable(false);
+            editBtn.setDisable(false);
+            deleteBtn.setDisable(false);
+       }
+        
+        if (userRole.equals("Manage")){
+            activeCompletedCheck.setDisable(false);
+            activeSelectedCheck.setDisable(false);
+            completeSelectedCheck.setDisable(false);
+            createTab.setDisable(false);
+            accountManageTab.setDisable(false);
+            userCreateTab.setDisable(false);
+            completeBtn.setDisable(false);
+            editBtn.setDisable(false);
+            deleteBtn.setDisable(false);
+        }
+        
+        if (userRole.equals("Update")){
+            activeCompletedCheck.setDisable(false);
+            accountManageTab.setDisable(false);
+            userCreateTab.setDisable(false);
+            completeBtn.setDisable(false);
+        }
+        
+        if (userRole.equals("Edit")){
+            activeCompletedCheck.setDisable(false);
+            userCreateTab.setDisable(false);
+            completeBtn.setDisable(false);
+        }
+        */
     }
 }
 
