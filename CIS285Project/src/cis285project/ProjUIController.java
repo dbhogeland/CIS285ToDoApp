@@ -15,6 +15,7 @@ package cis285project;
 
 
 // MySQL imports
+import static cis285project.CIS285Project.myControllerHandle;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -178,7 +179,7 @@ public class ProjUIController {
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
 
-        userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
+        //userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
         
         activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
         completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
@@ -468,7 +469,7 @@ public class ProjUIController {
      * Doesn't work for some reason
      */
     public void setRoleLbl(String output){
-        userRoleLbl.setText(output);
+        myControllerHandle.userRoleLbl.setText(output);
     }
     
     /*
