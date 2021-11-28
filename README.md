@@ -11,16 +11,17 @@ This application is designed to allow a business to manage tasks for their emplo
             -User profile allows the user to see only tasks assigned to them.
             -User profiles are assigned a role, which gives them different abilites to modify tasks and user accounts.
         -Tasks can be sorted by category, or viewed in a list of all tasks.
-        -Tasks are initially viewed in a collapsed state, with a short description and due date visible.
-        -Tasks can be clicked on to expand them. The expanded form displays all information for the task.
+        -Tasks are stored in a ChoiceBox which displays a short description of the task 
+        -When a user selects a task from the ChoiceBox, it displays all information for the task in the area below the ChoiceBox
         -The create tab allows users with the appropriate permissions to create tasks and assign them to users, as well as create new categories
         -The account management tab allows the user to change their password and contact information, and allows users with administrator privilages to change information for other users
         -The user creation tab allows for the creation of acccounts
+        -All information is stored in a database that allows for storage of a large number of accounts and tasks
 
 
-![](Doc/UpdatedUIMock1.png)
-![](Doc/UpdatedUIMock2.png)
-![](Doc/UpdatedUIMock3.png)
+![](Doc/FinalUIFeatures-1.png)
+![](Doc/FinalUIFeatures-2.png)
+![](Doc/FinalUIFeatures-3.png)
 
 
 
