@@ -22,7 +22,7 @@ This application is designed to allow a business to manage tasks for their emplo
 ![](Doc/FinalUIFeatures-1.png)
 ![](Doc/FinalUIFeatures-2.png)
 ![](Doc/FinalUIFeatures-3.png)
-![](Doc/CIS285-UML-Diagram)
+![](Doc/CIS285Project-UML-Diagram)
 
 
 
