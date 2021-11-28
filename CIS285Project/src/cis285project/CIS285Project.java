@@ -23,16 +23,21 @@ import javafx.fxml.FXMLLoader;
 
 public class CIS285Project extends Application {
 
+    static ProjUIController myControllerHandle;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("ProjUI.fxml"));
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource("ProjUI.fxml"));
+        Parent root = Loader.load();
+       
+        myControllerHandle = (ProjUIController)Loader.getController();
+        
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("To do Task Application");
         primaryStage.show();
-        
+       
         
     }
     
