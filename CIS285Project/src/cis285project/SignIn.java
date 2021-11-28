@@ -187,7 +187,7 @@ public class SignIn {
     public void logIn() {
         ProjUIController controlObj = new ProjUIController();
         String output = userID + " - " + userRole;
-        System.out.println(output);
+        //System.out.println(output);
         controlObj.setRoleLbl(output);
     }
 }

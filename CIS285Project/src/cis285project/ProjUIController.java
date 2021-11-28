@@ -464,7 +464,9 @@ public class ProjUIController {
      * Doesn't work for some reason
      */
     public void setRoleLbl(String output){
+        System.out.println(output);
         userRoleLbl.setText(output);
+        
     }
     
     /*
