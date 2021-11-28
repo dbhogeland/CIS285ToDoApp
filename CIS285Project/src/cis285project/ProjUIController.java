@@ -168,7 +168,7 @@ public class ProjUIController {
     private Statement st; // Creates a Statement for recieing data from the MySQL database
 
     // List to store user roles for the choice box
-    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
+    private final ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
     
     
     /*
