@@ -3,6 +3,7 @@
  * ProjUI.fxml program
  * 
  */
+
 package cis285project;
 
 /**
@@ -18,6 +19,8 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // JavaFX imports
 import javafx.fxml.FXML;
@@ -28,13 +31,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+//import javafx.scene.control.ButtonBase;
+//import javafx.scene.control.Labeled;
+//import java.util.HashSet;
+
 
 
 public class ProjUIController {
@@ -50,6 +57,7 @@ public class ProjUIController {
     @FXML private TextField shortDescTxtBox; // Text field for the short description of a task
     @FXML private DatePicker startDatePicker; // Set the start date of a task
     @FXML private TextField titleTxtBox; // Text field for the title of a task
+    @FXML private TextField tagsTxtBox; // Text field for the task's tags
 
     
     
@@ -93,7 +101,7 @@ public class ProjUIController {
     
     // Active Tasks tab controls
     @FXML private ChoiceBox<String> activeTaskChoiceBox; // Choice box to select an active task
-    @FXML private Label activeTaskNamelbl; // Label that displays the name of the task
+    @FXML private Label activeTaskNameLbl; // Label that displays the name of the task
     @FXML private Label activeShortDescLbl; // Label that displays the short description of the task
     @FXML private TextArea activeLongDescTextArea; // Text area that displays the long description of the task
     @FXML private Label activeDueLbl; // Label that displays the due date of the task
@@ -116,18 +124,29 @@ public class ProjUIController {
     @FXML private Label completeDueLbl; // Label that displays the due date
     @FXML private Label completeStartLbl; // Label that displays the start date
     @FXML private Label completeCreatedLbl; // Label that displays the created date
+    @FXML private Label completeUpdatedLbl; // Label that displays the last updated date for the task
     @FXML private Label completeAssignedLbl; // Label that displays who assigned the task
-    @FXML private CheckBox completeSelectedCheck; // Check box for selecting a task to delete
-
+    @FXML private CheckBox completeSelectedCheck; // Check box for selecting a task to delete  
     
-    
+  
     // Buttons at bottom of window and the ID/role label
     @FXML private Label userRoleLbl; // Label to display the User ID and role of the active user
     @FXML private Button completeBtn; // Button that updates the completed value for the task
     @FXML private Button editBtn; // Button that edits the selected task if the user has permission
     @FXML private Button deleteBtn; // Button that deletes the selected task if the user has permission
     
-    // Variales for LocalDate 
+  
+    // Menu items located on the top menu bar
+    @FXML private MenuItem signInMenuItem; // Menu Item to call the sign in popup window
+    @FXML private MenuItem signOutMenuItem; // Menu Item to sign out the user
+    @FXML private MenuItem exitMenuItem; // Menu Item that will close the application
+    @FXML private MenuItem userPermissionsMenuItem; // MenuItem that will show a popup that says what each role can do
+  
+    private String userID; //String variable to store the currently logged in User ID
+    private String userRole; // String variable to store the currently logged in User Role
+    
+  
+    // Variables for LocalDate 
     private String startD; // String variable for storing start date value
     private String dueD; // String variable for storing due date value
    
@@ -136,7 +155,9 @@ public class ProjUIController {
     private PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
     private Statement st; // Creates a Statement for recieing data from the MySQL database
 
-    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); // List to store user roles for the choice box
+    // List to store user roles for the choice box
+    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
+    
     
     /*
     *
@@ -152,7 +173,14 @@ public class ProjUIController {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
         completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list
+
+        userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
+        
+        activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
+        completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
+
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
+
     }
 
     
@@ -185,11 +213,11 @@ public class ProjUIController {
      * passed into the task Object parameters.
      */
     public void createTaskButtonClick(ActionEvent event) {
-        
-        Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(), 
-                startD, dueD);
-        
+
+        Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
+                startD, dueD, tagsTxtBox.getText());
         taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
+
         
         try {          
             Class.forName("com.sun.jdi.connect.spi.Connection");
@@ -229,23 +257,26 @@ public class ProjUIController {
         System.out.println(taskObj.getCategoryTag());
         
         clearCreateTaskInfo(); // Calls method that clears textfields and datepickers value when createTaskButton is Clicked
-        
     }
     
     /*
      * Void method that creates a category Object with the parameter categoryName
      * when the create category button is pressed
-     * Also, adds category name to Observable list on Category Class
-     *
+     * 
+     * Also, I added the ability for this method to add the created to the observable list for the active and completed category list views - Daniel
      */
     public void createCatButtonClick(ActionEvent event) {
-        
+      
         Category catObj = new Category(catNameTxtBox.getText());
+        EditTask editObj = new EditTask();
         System.out.println(catObj.getCategoryName()); // Temporary output statement to verify input
         
         completeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the completed list view
         activeCategoryListView.getItems().add(catObj.getCategoryName()); // Adds the created category to the active list view
-        
+
+        categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
+        editObj.categoryCh.getItems().add(catObj.getCategoryName()); // Adds items to the category choice box on the edit page
+
         clearCategoryInfo(); // Calls void method clearCategoryInfo and clears the category name text box
         
         // categorySelect.getItems().add(catObj.getCategoryName()); // returns the observablelist and adds category objects into it
@@ -279,37 +310,31 @@ public class ProjUIController {
             
         }
         
-        
-         
     }
     
     /*
      * Void method that clears the input values of creatTask textfields and DatePickers
      */
     public void clearCreateTaskInfo() {
-        
         titleTxtBox.clear();
         shortDescTxtBox.clear();
         longDescTxtBox.clear();
         startDatePicker.getEditor().clear();
         dueDatePicker.getEditor().clear();
         // categorySelect.getItems().clear();
-        
     }
     
     /*
      * Void method that clears category textfield
      */
     public void clearCategoryInfo() {
-        
         catNameTxtBox.clear();
-        
     }
     
     /*
      * Void method that updates the category choice box select by getting the data 
      * from the MySQL database in the category table.
-    */
+     */
     public void updateCatChoiceBox() {
         
         try {
@@ -344,11 +369,153 @@ public class ProjUIController {
             
         }
     }
+  
+    /*
+     * Void method to call the sign in popup when the sign in menu item is clicked - Daniel
+     */
+    public void callSignInWindow(ActionEvent event) {
+        SignIn signInObj = new SignIn();
+        signInObj.display();
+    }
+    
+    /*
+     * Void method to sign out the user and clear the lists of active and completed tasks - Daniel
+     */
+    public void signOut(ActionEvent event) {
+        activeTaskChoiceBox.getItems().clear();
+        completeCategoryListView.getItems().clear();
+        userID = "";
+        userRole = "";
+        userRoleLbl.setText("Please Sign In");
+    }
+    
+    /*
+     * Void method that closes the application - Daniel
+     */
+    public void closeApp(ActionEvent event) {
+        Platform.exit();
+    }
+    
+    /*
+     * Void method to show a pop up that will show what each role is allowed to do - Daniel
+     */
+    public void showUserPermissions(ActionEvent event) {
+        UserPermissionsPopup permObj = new UserPermissionsPopup();
+        permObj.displayPermissions();
+    }
+    
+    /*
+     * Method to update the completed value on the database for the selected task
+     */
+    public void completeTask(){
+        if(activeCompletedCheck.isSelected()){
+            String completedTask;
+            int index = activeTaskChoiceBox.getSelectionModel().getSelectedIndex();
+            completedTask = activeTaskChoiceBox.getValue();
+            //ToDo
+            //Need to add completed column to task database with a boolean data type
+            //Needs database code to set task as completed
+            
+            activeTaskChoiceBox.getItems().remove(index);
+        }
+    }
+    
+    public void editTask(){
+        EditTask edit = new EditTask();
         
+        if(activeSelectedCheck.isSelected()){
+            edit.setTaskToEdit(activeTaskChoiceBox.getValue());
+            edit.display();
+            //Will include a call to the display() method of the EditTask class so that the user can make changes
+            //Needs database code to edit the selected task
+        }
+        
+        if(completeSelectedCheck.isSelected()){
+            edit.setTaskToEdit(completedTaskChoiceBox.getValue());
+            edit.display();
+            //Will include a call to the display() method of the EditTask class so that the user can make changes
+            //Needs database code to edit the selected task
+        }
+    }
     
+    public void deleteTask(){
+        String task;
+        if(activeSelectedCheck.isSelected()){
+            int index = activeTaskChoiceBox.getSelectionModel().getSelectedIndex();
+            task = activeTaskChoiceBox.getValue();
+            
+            //Needs database code to delete selected task
+            
+            activeTaskChoiceBox.getItems().remove(index);
+        }
+        
+        if(completeSelectedCheck.isSelected()){
+            int index = completedTaskChoiceBox.getSelectionModel().getSelectedIndex();
+            task = completedTaskChoiceBox.getValue();
+
+            //Needs database code to delete selected task
+            
+            completedTaskChoiceBox.getItems().remove(index);
+        }
+    }
     
+    /*
+     * Method for changing the UserID - Role label
+     * Doesn't work for some reason
+     */
+    public void setRoleLbl(String output){
+        userRoleLbl.setText(output);
+    }
     
+    /*
+     * Method that updates the labels for the selected active task when called by the activeTaskChoiceBox listener
+     */
+    public void setActiveLabels(){
+        String title = "Task Name";
+        String shortDesc = "Short Description";
+        String longDesc = "Long Description";
+        String dueDate = "Unassigned";
+        String startDate = "Unassigned";
+        String createdD = "Unassigned";
+        String updated = "Unassigned";
+        String assignedBy = "Unassigned";
+        
+        // Needs code to pull from database
+        
+        activeTaskNameLbl.setText(title);
+        activeShortDescLbl.setText(shortDesc);
+        activeLongDescTextArea.setText(longDesc);
+        activeDueLbl.setText(dueDate);
+        activeStartLbl.setText(startDate);
+        activeCreatedLbl.setText(createdD);
+        activeUpdatedLbl.setText(updated);
+        activeAssignedLbl.setText(assignedBy);
+    }
     
+    /*
+     * Method that updates the labels for the selected completed task when called by the completedTaskChoiceBox listener
+     */
+    public void setCompleteLabels(){
+        String title = "Task Name";
+        String shortDesc = "Short Description";
+        String longDesc = "Long Description";
+        String dueDate = "Unassigned";
+        String startDate = "Unassigned";
+        String createdD = "Unassigned";
+        String updated = "Unassigned";
+        String assignedBy = "Unassigned";
+        
+        // Needs code to pull from database
+        
+        completeTaskNameLbl.setText(title);
+        completeShortDescLbl.setText(shortDesc);
+        completeLongDescArea.setText(longDesc);
+        completeDueLbl.setText(dueDate);
+        completeStartLbl.setText(startDate);
+        completeCreatedLbl.setText(createdD);
+        completeUpdatedLbl.setText(updated);
+        completeAssignedLbl.setText(assignedBy);
+    }
 }
 
     
