@@ -21,7 +21,8 @@ public class Task {
     private String dueDate; // String Variable for due date of a task. Can be converted to int if needed.
     private String categoryTag; // String variable for category tag to group task later on.
     private String taskTags; // String field to store the tags input as a whole
-    
+    private String userNameTask;
+    private String assignedBy;
     /*
      * Constructor for basic Task
      * information that the user will provide 
@@ -78,6 +79,18 @@ public class Task {
     
     public String getCategoryTag() { // Method for retrieving a categoryTag
         return categoryTag;
+    }
+    public void setUserNameTask(String uT) { // Method for setting the username for the task create Section
+        this.userNameTask = uT;
+    }
+    public String getUserNameTask() { // Method for getting the username for the task create section
+        return userNameTask;
+    }
+    public void setAssignedBy(String aB) { // Method for setting who assigned a task
+        this.assignedBy = aB;
+    }
+    public String getAssignedBy() { // Method for getting who a task was assigned by
+        return assignedBy;
     }
     
     /*
