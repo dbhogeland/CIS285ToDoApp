@@ -88,6 +88,7 @@ public class SignIn {
         if (userPassInput.equals(passFromDb)){
             setID(idInput);
             setRole(idInput);
+            currentUser();
             displaySuccess();
             logIn();
             controllerObj.setPermissions();
@@ -190,6 +191,16 @@ public class SignIn {
         String output = userID + " - " + userRole;
         //System.out.println(output);
         controlObj.setRoleLbl(output);
+    }
+    
+    /*
+     * Void method for assigning current user in Controller class when a log in is successful
+    */
+    public void currentUser() {
+        ProjUIController controlObj = new ProjUIController();
+        controlObj.setCurrentUser(getID());
+        //System.out.println(getID());
+        System.out.println("Current User Test");
     }
     
     
