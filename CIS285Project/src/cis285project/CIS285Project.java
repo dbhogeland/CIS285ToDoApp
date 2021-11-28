@@ -23,15 +23,15 @@ import javafx.fxml.FXMLLoader;
 
 public class CIS285Project extends Application {
 
-    static ProjUIController myControllerHandle;
+    static ProjUIController myControllerHandle; // Static global variable myControllerHandler
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("ProjUI.fxml"));
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource("ProjUI.fxml")); // Create a new FXMLLoader Loader and get the JavaFX File
         Parent root = Loader.load();
        
-        myControllerHandle = (ProjUIController)Loader.getController();
+        myControllerHandle = (ProjUIController)Loader.getController();  // Set myConrollerHandle equal to the current instance of the Controller class
         
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

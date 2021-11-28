@@ -147,8 +147,10 @@ public class ProjUIController {
     @FXML private MenuItem exitMenuItem; // Menu Item that will close the application
     @FXML private MenuItem userPermissionsMenuItem; // MenuItem that will show a popup that says what each role can do
   
+    // Variables for User 
     private String userID; //String variable to store the currently logged in User ID
     private String userRole; // String variable to store the currently logged in User Role
+    private String currentUser; // String Variable to store the current user
     
   
     // Variables for LocalDate 
@@ -156,6 +158,9 @@ public class ProjUIController {
     private String dueD; // String variable for storing due date value
    
     // Variables for JDBC and MySQL database
+    private String host = "jdbc:mysql://remotemysql.com:3306/7ToOqkvNTD";
+    private String user = "7ToOqkvNTD";
+    private String pass = "sMXZGFhH0z";
     private Connection con1; // Creates a variable for connection to MySQL database
     private PreparedStatement insert; // Creates a PreparedStatement variable insert for adding data to the MySQL database
     private Statement st; // Creates a Statement for recieing data from the MySQL database
@@ -187,8 +192,13 @@ public class ProjUIController {
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
 
     }
-
     
+    /*
+     * Void Method for setting the current application user
+     */
+    public void setCurrentUser(String u) {
+        myControllerHandle.currentUser = u;
+    }
     /*
      * Void method which creates a LocalDate object for start date and gets 
      * the value from UI DatePicker and converts it into a string startD
@@ -218,30 +228,37 @@ public class ProjUIController {
      * passed into the task Object parameters.
      */
     public void createTaskButtonClick(ActionEvent event) {
-
+        
+        SignIn signInObj = new SignIn();
         Task taskObj = new Task(titleTxtBox.getText(),shortDescTxtBox.getText(),longDescTxtBox.getText(),
                 startD, dueD, tagsTxtBox.getText());
+        
+        taskObj.setUserNameTask(assignTxtBox.getText()); // Get text from assignTxtBox for assigning a user to a task
+        taskObj.setAssignedBy(currentUser); // Takes the current user and stores it into task class assignedBy variable
+       
         taskObj.setCategoryTag(categorySelect.getValue()); // Sets the value of variable categoryTag to choicebox selection
 
         
         try {          
             Class.forName("com.sun.jdi.connect.spi.Connection");
             
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
-            insert = con1.prepareStatement("INSERT INTO task(task_name,task_short_desc,task_long_desc," // Executes precompiled SQL statement
-                    + "task_start_date,task_due_date,task_category)VALUES(?,?,?,?,?,?)"); 
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+            insert = con1.prepareStatement("INSERT INTO task(username,task_name,task_short_desc,task_long_desc," // Executes precompiled SQL statement
+                    + "task_start_date,task_due_date,task_category,task_tag,assigned_by)VALUES(?,?,?,?,?,?,?,?,?)"); 
             
             /*
              * Uses PreparedStatement equal to insert and adds the values in the corresponding columns for one row at a time 
              * Int - Column number , String - data to enter
             */
-            insert.setString(1, taskObj.getTaskName()); 
-            insert.setString(2, taskObj.getTaskShortDesc());
-            insert.setString(3, taskObj.getTaskLongDesc());
-            insert.setString(4, taskObj.getStartDate());
-            insert.setString(5, taskObj.getDueDate());
-            insert.setString(6, taskObj.getCategoryTag());
-            // insert.setString(7, taskObj.getTags()); For when we implement tags
+            insert.setString(1, taskObj.getUserNameTask());
+            insert.setString(2, taskObj.getTaskName()); 
+            insert.setString(3, taskObj.getTaskShortDesc());
+            insert.setString(4, taskObj.getTaskLongDesc());
+            insert.setString(5, taskObj.getStartDate());
+            insert.setString(6, taskObj.getDueDate());
+            insert.setString(7, taskObj.getCategoryTag());
+            insert.setString(8, taskObj.getTaskTags()); 
+            insert.setString(9, taskObj.getAssignedBy());
             
             insert.executeUpdate();
             insert.close();
@@ -291,7 +308,7 @@ public class ProjUIController {
         try {            
             Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
             
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
             insert = con1.prepareStatement("INSERT INTO category(category)VALUES(?)"); // Executes precompiled SQL statement
             
             /*
@@ -326,6 +343,9 @@ public class ProjUIController {
         longDescTxtBox.clear();
         startDatePicker.getEditor().clear();
         dueDatePicker.getEditor().clear();
+        assignTxtBox.clear();
+        tagsTxtBox.clear();
+        
         // categorySelect.getItems().clear();
     }
     
@@ -345,7 +365,7 @@ public class ProjUIController {
         try {
             
             Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/cis285db", "root", "CIS285DB!!"); // Creates connection to the MySQL database using host / username / datbase name
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
            
             st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
             ResultSet rs = st.executeQuery("SELECT * FROM category"); // Execute the query and get the java resultset
@@ -374,6 +394,7 @@ public class ProjUIController {
             
         }
     }
+    
   
     /*
      * Void method to call the sign in popup when the sign in menu item is clicked - Daniel
