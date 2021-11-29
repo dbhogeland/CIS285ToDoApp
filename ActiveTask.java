@@ -1,6 +1,6 @@
 package cis285project;
 
-public class Task {
+public class ActiveTask {
 
     public String Category1;
     public String Category2;
