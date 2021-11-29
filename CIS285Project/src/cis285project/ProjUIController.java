@@ -562,8 +562,9 @@ public class ProjUIController {
      * Void method for updateding active task choicebox from database based on criteria such as user signed in,
      * task category, task is active 
     */
-    public void updateActiveTaskChoiceBox(String c, String u, Boolean t) {
-   
+
+    public void updateActiveTaskChoiceBox(String c, String u, boolean t) {
+
         try {
             
             Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
@@ -577,8 +578,8 @@ public class ProjUIController {
                 
                 // If statement checks to see if database table contains the following: category, username, active status
                 if (rs.getString("task_category").equalsIgnoreCase(c) && rs.getString("username").equalsIgnoreCase(u) &&
-                        rs.getBoolean("is_active") == true) { 
-                    
+                        rs.getBoolean("is_active") == t) { 
+   
                     // If statement checks to see if active task choice box already contains task name to avoid adding duplicates
                     if (activeTaskChoiceBox.getItems().contains(rs.getString("task_name"))) {
                         
@@ -603,10 +604,14 @@ public class ProjUIController {
             Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
             
         }
+
+        
+        setActiveLabels(); // Calls setActiveLabels method
     }
     
+   
     /*
-     * Method that updates the labels for the selected active task when called by the activeTaskChoiceBox listener
+     * Method that updates the labels for the selected active task automatically through the database 
      */
     public void setActiveLabels(){
         String title = "Task Name";
@@ -618,8 +623,6 @@ public class ProjUIController {
         String updated = "Unassigned";
         String assignedBy = "Unassigned";
         
-        // Needs code to pull from database
-        
         activeTaskNameLbl.setText(title);
         activeShortDescLbl.setText(shortDesc);
         activeLongDescTextArea.setText(longDesc);
@@ -628,6 +631,59 @@ public class ProjUIController {
         activeCreatedLbl.setText(createdD);
         activeUpdatedLbl.setText(updated);
         activeAssignedLbl.setText(assignedBy);
+        
+        /*
+         * Gets the choicebox options and sets the selected one as a string variable. Passess variable into Query search 
+         * and pulls specified task then displays labels for that task
+         */
+        activeTaskChoiceBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> { 
+           
+            String selectedItem = activeTaskChoiceBox.getSelectionModel().getSelectedItem(); 
+            
+             try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM task WHERE task_name='" + selectedItem + "'"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+
+                    String taskName = rs.getString("task_name"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskShortDesc = rs.getString("task_short_desc"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskLongDesc = rs.getString("task_long_desc"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskDueDate = rs.getString("task_due_date"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskStartDate = rs.getString("task_start_date"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskAssignedBy = rs.getString("assigned_by"); // Adds ResultSet rs to String variable from the specified database column name
+                     
+                    activeTaskNameLbl.setText(taskName); // Set activeTaskNameLbl to variable taskName
+                    activeShortDescLbl.setText(taskShortDesc); // Set activeShortDescLbl to varabile taskShortDesc
+                    activeLongDescTextArea.setText(taskLongDesc); // Set activeLongDescTextArea to taskLongDesc
+                    activeDueLbl.setText(taskDueDate); // Set activeDueLbl to varaible taskDueDate
+                    activeStartLbl.setText(taskStartDate); // Set activeStartLbl to variable taskStartDate
+                    //activeCreatedLbl.setText(createdD); need to be implemented in 
+                    //activeUpdatedLbl.setText(updated); need to be implemented in
+                    activeAssignedLbl.setText(taskAssignedBy); // Set activeAssignLbl to variable taskAssignedBy
+                
+            }
+            
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    
+        });
+        
     }
     
     /*
