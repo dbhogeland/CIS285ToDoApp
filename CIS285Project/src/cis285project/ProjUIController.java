@@ -189,6 +189,7 @@ public class ProjUIController {
         //activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list ** MIGHT NEED TO REMOVE ALL RELATED CODE**
         updateActiveCategoryLV();
         updateCompletedCategoryLV();
+        updateUserRoleChoiceBox();
         //userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
         //activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
         //completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
@@ -275,6 +276,40 @@ public class ProjUIController {
         createCityTxtBox.clear();
         createStateTxtBox.clear();
         createPhoneTxtBox.clear();
+    }
+    
+    public void updateUserRoleChoiceBox() {
+        
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM userroles"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+                if (userRoleChoiceBox.getItems().contains(rs.getString("userrole"))) { // If statement checks if categorySelect contains ResultSet rs to avoid duplicates
+                    
+                }
+                else { 
+                    String userRole = rs.getString("userrole"); // Adds ResultSet rs to string 
+                    userRoleChoiceBox.getItems().add(userRole); // Adds String to userRole
+                }
+            }
+            
+            st.close();
+            rs.close();
+            
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
     }
     
     public void setStartDate(ActionEvent event) {
