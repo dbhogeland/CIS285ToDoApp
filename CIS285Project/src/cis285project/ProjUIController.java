@@ -127,7 +127,7 @@ public class ProjUIController {
     @FXML private ChoiceBox<String> completedTaskChoiceBox; // Choice box to select a completed task
     @FXML private Label completeTaskNameLbl; // Label that displays the task name
     @FXML private Label completeShortDescLbl; // Label that displays the short description
-    @FXML private TextArea completeLongDescArea; // Text area that displays the long description
+    @FXML private TextArea completeLongDescTextArea; // Text area that displays the long description
     @FXML private Label completeDueLbl; // Label that displays the due date
     @FXML private Label completeStartLbl; // Label that displays the start date
     @FXML private Label completeCreatedLbl; // Label that displays the created date
@@ -178,18 +178,18 @@ public class ProjUIController {
     * when the app loads, place it in this method
     *
     * -Daniel
-    *
+    * All methods / others might need to be removed since there is no use for them because of database. MAYBE - jason
     */
     @FXML
     private void initialize() {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
-        completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
+        //completeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the completed category list
         //activeCategoryListView.getItems().add("All Tasks"); // Adds an all tasks option to the active category list ** MIGHT NEED TO REMOVE ALL RELATED CODE**
         updateActiveCategoryLV();
+        updateCompletedCategoryLV();
         //userRoleLbl.setText("Please Sign In"); // Sets the ID/Role label to a Sign In reminder
-        
         //activeTaskChoiceBox.setOnAction(e-> setActiveLabels());
-        completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
+        //completedTaskChoiceBox.setOnAction(e-> setCompleteLabels());
 
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
 
@@ -435,6 +435,7 @@ public class ProjUIController {
     /*
      * Method to update the completed value on the database for the selected task
      */
+    
     public void completeTask(){
         if(activeCompletedCheck.isSelected()){
             String completedTask;
@@ -447,6 +448,7 @@ public class ProjUIController {
             activeTaskChoiceBox.getItems().remove(index);
         }
     }
+    
     
     public void editTask(){
         EditTask edit = new EditTask();
@@ -495,7 +497,7 @@ public class ProjUIController {
         myControllerHandle.userRoleLbl.setText(output);
     }
     
-    /*
+    /*                  *** Active Task Tab Start here ****
      * Void method for retrieving list of categorys from the database and updating
      * the active task tab category listview
      */
@@ -577,15 +579,15 @@ public class ProjUIController {
                 
                 // If statement checks to see if database table contains the following: category, username, active status
                 if (rs.getString("task_category").equalsIgnoreCase(c) && rs.getString("username").equalsIgnoreCase(u) &&
-                        rs.getBoolean("is_active") == t) { 
+                        rs.getBoolean("is_active") == true) { 
                     
                     // If statement checks to see if active task choice box already contains task name to avoid adding duplicates
                     if (activeTaskChoiceBox.getItems().contains(rs.getString("task_name"))) {
                         
                     }
                     else {
-                        String activeCatLV = rs.getString("task_name"); // Adds ResultSet rs to string activeCatLV
-                        activeTaskChoiceBox.getItems().add(activeCatLV);  // Adds the task to the choicebox
+                        String activeTask = rs.getString("task_name"); // Adds ResultSet rs to string activeCatLV
+                        activeTaskChoiceBox.getItems().add(activeTask);  // Adds the task to the choicebox
                     }
                     
                 }
@@ -682,12 +684,129 @@ public class ProjUIController {
     
         });
         
+    } 
+    /*
+     *                       **** Active Task Tab End Here ****
+     */
+    
+    /*                     **** Completed Task Tab Start Here ****
+     * Void method for retrieving list of categorys from the database and updating
+     * the completed task tab category listview
+     */
+    public void updateCompletedCategoryLV() {
+               
+        
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM category"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+                if (completeCategoryListView.getItems().contains(rs.getString("category"))) { // Checks for repeats of a category
+                    
+                }
+                else { 
+                    String activeCompCatLV = rs.getString("category"); // Adds ResultSet rs to string activeCompCatLV
+                    completeCategoryListView.getItems().add(activeCompCatLV);  // Adds the category to the listview
+                }
+            }
+         
+            
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled ActiveCategory from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        
+        
+        /*
+         * Gets the active completed category listview and sets the selected item into a variable and updates the choicebox based on the selection
+         */
+        completeCategoryListView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> { 
+            String selectedItem = completeCategoryListView.getSelectionModel().getSelectedItem(); 
+            String prevSelectedItem = selectedItem;
+            
+            // If statment to determine whether the current selected listview item is the same and either leaves or deletes current choicebox options
+            if (!prevSelectedItem.equals(selectedItem)) {
+                System.out.println(completeCategoryListView.getItems());
+                updateCompletedTaskChoiceBox(selectedItem, currentUser, false); // Updates choicebox
+            }
+            else {
+                
+                completedTaskChoiceBox.getItems().clear(); // clears choicebox
+                System.out.println(activeTaskChoiceBox.getItems());
+                updateCompletedTaskChoiceBox(selectedItem, currentUser, false); // Updates choicebox
+            }
+            
+        });
+        
+    }
+    
+    /*
+     * Void method for updateding completed task choicebox from database based on criteria such as user signed in,
+     * task category, task is not active 
+    */
+    public void updateCompletedTaskChoiceBox(String c, String u, boolean t) {
+   
+        try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM task"); // Execute the query and get the java resultset
+            
+            // While loop for iterating through ResultSet
+            while (rs.next()) {
+                
+                // If statement checks to see if database table contains the following: category, username, active status
+                if (rs.getString("task_category").equalsIgnoreCase(c) && rs.getString("username").equalsIgnoreCase(u) &&
+                        rs.getBoolean("is_active") == t) { 
+                    
+                    // If statement checks to see if completed task choice box already contains task name to avoid adding duplicates
+                    if (completedTaskChoiceBox.getItems().contains(rs.getString("task_name"))) {
+                        
+                    }
+                    else {
+                        String completedTask = rs.getString("task_name"); // Adds ResultSet rs to string activeCatLV
+                        completedTaskChoiceBox.getItems().add(completedTask);  // Adds the task to the choicebox
+                    }
+                    
+                }
+                
+            }
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled ActiveCategory from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        setCompletedLabels(); // Calls setCompletedLabels method
     }
     
     /*
      * Method that updates the labels for the selected completed task when called by the completedTaskChoiceBox listener
      */
-    public void setCompleteLabels(){
+    public void setCompletedLabels(){
         String title = "Task Name";
         String shortDesc = "Short Description";
         String longDesc = "Long Description";
@@ -697,16 +816,67 @@ public class ProjUIController {
         String updated = "Unassigned";
         String assignedBy = "Unassigned";
         
-        // Needs code to pull from database
-        
         completeTaskNameLbl.setText(title);
         completeShortDescLbl.setText(shortDesc);
-        completeLongDescArea.setText(longDesc);
+        completeLongDescTextArea.setText(longDesc);
         completeDueLbl.setText(dueDate);
         completeStartLbl.setText(startDate);
         completeCreatedLbl.setText(createdD);
         completeUpdatedLbl.setText(updated);
         completeAssignedLbl.setText(assignedBy);
+        
+        /*
+         * Gets the choicebox options and sets the selected one as a string variable. Passess variable into Query search 
+         * and pulls specified task then displays labels for that task
+         */
+        completedTaskChoiceBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> { 
+           
+            String selectedItem = completedTaskChoiceBox.getSelectionModel().getSelectedItem(); 
+            
+             try {
+            
+            Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+           
+            st = con1.createStatement(); // Creates SQL basic statement in java for providing methods to execute queries in the database
+            ResultSet rs = st.executeQuery("SELECT * FROM task WHERE task_name='" + selectedItem + "'"); // Execute the query and get the java resultset
+            
+            // While loop to iterate through the java resultset
+            while (rs.next()) {
+
+                    String taskName = rs.getString("task_name"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskShortDesc = rs.getString("task_short_desc"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskLongDesc = rs.getString("task_long_desc"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskDueDate = rs.getString("task_due_date"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskStartDate = rs.getString("task_start_date"); // Adds ResultSet rs to String variable from the specified database column name
+                    String taskAssignedBy = rs.getString("assigned_by"); // Adds ResultSet rs to String variable from the specified database column name
+                     
+                    completeTaskNameLbl.setText(taskName); // Set completeTaskNameLbl to variable taskName
+                    completeShortDescLbl.setText(taskShortDesc); // Set completeShortDescLbl to varabile taskShortDesc
+                    completeLongDescTextArea.setText(taskLongDesc); // Set completeLongDescTextArea to taskLongDesc
+                    completeDueLbl.setText(taskDueDate); // Set completeDueLbl to varaible taskDueDate
+                    completeStartLbl.setText(taskStartDate); // Set completeStartLbl to variable taskStartDate
+                    //activeCreatedLbl.setText(createdD); need to be implemented in 
+                    //activeUpdatedLbl.setText(updated); need to be implemented in
+                    completeAssignedLbl.setText(taskAssignedBy); // Set completeAssignLbl to variable taskAssignedBy
+                
+            }
+            
+            st.close();
+            rs.close();
+            
+            System.out.println("Successfully pulled from MySql server!");
+            
+        } catch (ClassNotFoundException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {           
+            Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    
+        });
+        
     }
     
     /*
