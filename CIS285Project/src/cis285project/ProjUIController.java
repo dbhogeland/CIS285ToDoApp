@@ -194,7 +194,10 @@ public class ProjUIController {
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
 
     }
-    
+    public user userObj=new user (oldPassTxtBox.getText(),newPassTxtBox.getText(),adminUserTxtBox.getText(),adminOldPassTxtBox.getText(),adminNewPassTxtBox.getText());
+    task taskObj=new task (cityTxtBox.getText(), stateTxtBox.getText(), stateTxtBox.getText(),phoneTxtBox.getText(),adminCityTxtBox.getText(),adminStateTxtBox.getText(),adminStreetTxtBox.getText(),adminPhoneTxtBox.getText());
+
+
     /*
      * Void Method for setting the current application user
      */
