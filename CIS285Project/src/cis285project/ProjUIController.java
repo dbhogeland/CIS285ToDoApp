@@ -182,6 +182,7 @@ public class ProjUIController {
     * -Daniel
     * All methods / others might need to be removed since there is no use for them because of database. MAYBE - jason
     */
+    
     @FXML
     private void initialize() {
         userRoleChoiceBox.setItems(userRoleList); // Adds options to the user role choice box on the user creation tab
@@ -207,13 +208,14 @@ public class ProjUIController {
     public void setCurrentUser(String u) {
         myControllerHandle.currentUser = u;
     }
-    /*
-     * Void method which creates a LocalDate object for start date and gets 
-     * the value from UI DatePicker and converts it into a string startD
-     */
     
+    /*
+     * Void method for create user button that creates a new user object and gets 
+     * textfield data and uploads it into the database
+     */
     public void userCreateBtnClick(ActionEvent event) {
         
+        // Creates an alert for letting user know password is incorrect
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Password ERROR!");
         alert.setContentText("The passwords do not match!");
@@ -267,7 +269,9 @@ public class ProjUIController {
         
     }
     
-    
+    /*
+     * Clears text fields in user creation tab
+     */
     public void clearUserInfo() {
         createIDTxtBox.clear();
         createPassTxtBox.clear();
@@ -278,6 +282,9 @@ public class ProjUIController {
         createPhoneTxtBox.clear();
     }
     
+    /*
+     * Void method to update user role choicebox from database
+     */
     public void updateUserRoleChoiceBox() {
         
         try {
@@ -290,12 +297,12 @@ public class ProjUIController {
             
             // While loop to iterate through the java resultset
             while (rs.next()) {
-                if (userRoleChoiceBox.getItems().contains(rs.getString("userrole"))) { // If statement checks if categorySelect contains ResultSet rs to avoid duplicates
+                if (userRoleChoiceBox.getItems().contains(rs.getString("userrole"))) { // If statement checks if choicebox contains ResultSet rs to avoid duplicates
                     
                 }
                 else { 
-                    String userRole = rs.getString("userrole"); // Adds ResultSet rs to string 
-                    userRoleChoiceBox.getItems().add(userRole); // Adds String to userRole
+                    String userRole = rs.getString("userrole"); // Adds ResultSet rs to string userRole 
+                    userRoleChoiceBox.getItems().add(userRole); // Adds String to choicebox
                 }
             }
             
@@ -312,6 +319,10 @@ public class ProjUIController {
         }
     }
     
+    /*
+     * Void method which creates a LocalDate object for start date and gets 
+     * the value from UI DatePicker and converts it into a string startD
+     */
     public void setStartDate(ActionEvent event) {
         LocalDate startDate = startDatePicker.getValue();
         startD = startDate.toString();
