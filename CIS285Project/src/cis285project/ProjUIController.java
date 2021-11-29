@@ -168,7 +168,7 @@ public class ProjUIController {
     private Statement st; // Creates a Statement for recieing data from the MySQL database
 
     // List to store user roles for the choice box
-    ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
+    private final ObservableList<String> userRoleList = FXCollections.observableArrayList("Read", "Edit", "Update", "Manage", "Administrator"); 
     
     
     /*
@@ -194,7 +194,10 @@ public class ProjUIController {
         updateCatChoiceBox(); // update the choice box under task create with categories stored in database
 
     }
-    
+    //public user userObj=new user (oldPassTxtBox.getText(),newPassTxtBox.getText(),adminUserTxtBox.getText(),adminOldPassTxtBox.getText(),adminNewPassTxtBox.getText());
+    //task taskObj=new task (cityTxtBox.getText(), stateTxtBox.getText(), stateTxtBox.getText(),phoneTxtBox.getText(),adminCityTxtBox.getText(),adminStateTxtBox.getText(),adminStreetTxtBox.getText(),adminPhoneTxtBox.getText());
+
+
     /*
      * Void Method for setting the current application user
      */
@@ -564,8 +567,9 @@ public class ProjUIController {
      * Void method for updateding active task choicebox from database based on criteria such as user signed in,
      * task category, task is active 
     */
+
     public void updateActiveTaskChoiceBox(String c, String u, boolean t) {
-   
+
         try {
             
             Class.forName("com.sun.jdi.connect.spi.Connection"); // Loads the driver at runtime
@@ -579,8 +583,8 @@ public class ProjUIController {
                 
                 // If statement checks to see if database table contains the following: category, username, active status
                 if (rs.getString("task_category").equalsIgnoreCase(c) && rs.getString("username").equalsIgnoreCase(u) &&
-                        rs.getBoolean("is_active") == true) { 
-                    
+                        rs.getBoolean("is_active") == t) {
+
                     // If statement checks to see if active task choice box already contains task name to avoid adding duplicates
                     if (activeTaskChoiceBox.getItems().contains(rs.getString("task_name"))) {
                         
@@ -605,13 +609,14 @@ public class ProjUIController {
             Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
             
         }
+
         
         setActiveLabels(); // Calls setActiveLabels method
     }
     
    
     /*
-     * Method that updates the labels for the selected active task automatically through the database
+     * Method that updates the labels for the selected active task automatically through the database 
      */
     public void setActiveLabels(){
         String title = "Task Name";
