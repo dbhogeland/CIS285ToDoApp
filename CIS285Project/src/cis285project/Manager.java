@@ -1,85 +1,55 @@
-/*package cis285project;
+package cis285project;
 
 import javax.swing.JTextField;
 
 //author @William 
+//Edited by Daniel
+
 public class Manager {
-    public String user;// Name of Account In Use
-    public int user_id = 1; // Possible Users Able to Login
-    private String password;// Password of Account
-    public static int count = 1;// Possible Number of Passwords Account has in Use
-    public static String input;
-    public String Street;// Area of User
-    public String Phone;// Number of User
-    public String State;//
-    public String City;//
-
-    /*
-     * Constructor Variables for creating account User will provide this imformation
-     
-
-    public void Users (String Ruser, String Rpassword) {
-
-        this.user_id = count++;
-        this.user = Ruser;
-        this.password = Rpassword;
-        count++;
-        System.out.printf("User %s has been updated \n", Ruser);
+    
+    
+    
+    public void setNewPassword(String nP){
+        
     }
-
-    public boolean changePassword(){            
-            String pass = ""; //get old password from user
-            boolean correct;
-            int n = 1;
-            while (n-- > 0) {
-              if(pass.equals(password)) {
-                  String newPass = ""; // get new password from user
-                  String conNewPass = ""; // confirm new password from user
-                  if (newPass.equals(conNewPass)) {
-                      password = newPass;
-                      // password changed
-                      
-                  } else {
-                      // wrong confirmation.. password not changed
-                      return false;
-                  }
-              }
-              else {
-                  // tell user to enter the correct old password
-                  pass = ""; // ask user for old password again
-              }
-            }
+    
+    public void setNewStreet(String nS){
+        
     }
-
-    public static String Sr; String Ph; String Sa;String Cy;{
-            this.City=Cy;
-            this.Phone=Ph;
-            this.State=Sa;
-            this.Street=Sr;
+    
+    public void setNewCity(String nC){
+        
     }
-
-    public void setCity(String Cy) {// Method to Set City Location
-        City = Cy;
+    
+    public void setNewState(String nS){
+        
     }
-
-    public String getCity() {// Retrieve City
-        return City;
+    
+    public void setNewPhone(String nP){
+        
     }
-
-    public void setNumber(String No) {// Method to Set Number
-        Phone = No;
+    
+    public void setUserIDAdmin(String uID){
+        
     }
-
-    public String getNumber() {// Retrieve Number
-        return Phone;
+    
+    public void setNewPassAdmin(String nPA){
+        
     }
-
-    public void setState(String Sa) {// Method to Set State Location
-        State = Sa;
+    
+    public void setNewStreetAdmin(String nSA){
+        
     }
-
-    public String getState() {// Retrieve State
-        return State;
+    
+    public void setNewCityAdmin(String nCA){
+        
+    }
+    
+    public void setNewStateAdmin(String nSA){
+        
+    }
+    
+    public void setNewPhoneAdmin(String nPA){
+        
     }
 }
-*/
