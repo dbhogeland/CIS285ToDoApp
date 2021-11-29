@@ -1006,7 +1006,68 @@ public class ProjUIController {
         */
     }
 
-   
+    
+    /*
+     * Method to test for input on the fields of the Account Management tab and send input to the Manager Class
+     */
+    public void updateAccountInfo(){
+        Manager managerObj = new Manager();
+        
+        if(newPassTxtBox.getText() != null && !newPassTxtBox.getText().trim().isEmpty()){
+            if(oldPassTxtBox.getText().equals(newPassTxtBox.getText())){
+                managerObj.setNewPassword(newPassTxtBox.getText());
+            }
+        }
+        
+        if(streetTxtBox.getText() != null && !streetTxtBox.getText().trim().isEmpty()){
+            managerObj.setNewStreet(streetTxtBox.getText());
+        }
+        
+        if(cityTxtBox.getText() != null && !cityTxtBox.getText().trim().isEmpty()){
+            managerObj.setNewCity(cityTxtBox.getText());
+        }
+        
+        if(stateTxtBox.getText() != null && !stateTxtBox.getText().trim().isEmpty()){
+            managerObj.setNewState(stateTxtBox.getText());
+        }
+        
+        if(phoneTxtBox.getText() != null && !phoneTxtBox.getText().trim().isEmpty()){
+            managerObj.setNewPhone(phoneTxtBox.getText());
+        }
+    }
+    
+    /*
+     * Method to test for input on the fields of the Account Management tab Admin section and send input to the Manager Class
+     */
+    public void updateAccountInfoAdmin(){
+        Manager managerObj = new Manager();
+        
+        if(adminNewPassTxtBox.getText() != null && !adminNewPassTxtBox.getText().trim().isEmpty()){
+            managerObj.setNewPassAdmin(adminNewPassTxtBox.getText());
+            
+            if(adminStreetTxtBox.getText() != null && !adminStreetTxtBox.getText().trim().isEmpty()){
+                managerObj.setNewStreetAdmin(adminStreetTxtBox.getText());
+            }
+            
+            if(adminStreetTxtBox.getText() != null && !adminStreetTxtBox.getText().trim().isEmpty()){
+                managerObj.setNewStreetAdmin(adminStreetTxtBox.getText());
+            }
+        
+            if(adminCityTxtBox.getText() != null && !adminCityTxtBox.getText().trim().isEmpty()){
+                managerObj.setNewCityAdmin(adminCityTxtBox.getText());
+            }
+        
+            if(adminStateTxtBox.getText() != null && !adminStateTxtBox.getText().trim().isEmpty()){
+             managerObj.setNewStateAdmin(adminStateTxtBox.getText());
+            }
+        
+            if(adminPhoneTxtBox.getText() != null && !adminPhoneTxtBox.getText().trim().isEmpty()){
+                managerObj.setNewPhoneAdmin(adminPhoneTxtBox.getText());
+            }
+        }
+        
+    }
+
 }
 
     

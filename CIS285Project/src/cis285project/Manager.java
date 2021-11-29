@@ -1,85 +1,115 @@
-/*package cis285project;
+package cis285project;
 
 import javax.swing.JTextField;
 
 //author @William 
+//Edited by Daniel
+
 public class Manager {
-    public String user;// Name of Account In Use
-    public int user_id = 1; // Possible Users Able to Login
-    private String password;// Password of Account
-    public static int count = 1;// Possible Number of Passwords Account has in Use
-    public static String input;
-    public String Street;// Area of User
-    public String Phone;// Number of User
-    public String State;//
-    public String City;//
-
+    
     /*
-     * Constructor Variables for creating account User will provide this imformation
-     
-
-    public void Users (String Ruser, String Rpassword) {
-
-        this.user_id = count++;
-        this.user = Ruser;
-        this.password = Rpassword;
-        count++;
-        System.out.printf("User %s has been updated \n", Ruser);
+     * Class fields to store updated account information
+     */
+    private String newPassword;
+    private String newStreet;
+    private String newCity;
+    private String newState;
+    private String newPhone;
+    private String userID;
+    private String newPassAdmin;
+    private String newStreetAdmin;
+    private String newCityAdmin;
+    private String newStateAdmin;
+    private String newPhoneAdmin;
+    
+    /*
+     * Setters and getters for class fields
+     */
+    public void setNewPassword(String nP){
+        newPassword = nP;
     }
-
-    public boolean changePassword(){            
-            String pass = ""; //get old password from user
-            boolean correct;
-            int n = 1;
-            while (n-- > 0) {
-              if(pass.equals(password)) {
-                  String newPass = ""; // get new password from user
-                  String conNewPass = ""; // confirm new password from user
-                  if (newPass.equals(conNewPass)) {
-                      password = newPass;
-                      // password changed
-                      
-                  } else {
-                      // wrong confirmation.. password not changed
-                      return false;
-                  }
-              }
-              else {
-                  // tell user to enter the correct old password
-                  pass = ""; // ask user for old password again
-              }
-            }
+    
+    public String getNewPassword(){
+        return newPassword;
     }
-
-    public static String Sr; String Ph; String Sa;String Cy;{
-            this.City=Cy;
-            this.Phone=Ph;
-            this.State=Sa;
-            this.Street=Sr;
+    
+    public void setNewStreet(String nS){
+        newStreet = nS;
     }
-
-    public void setCity(String Cy) {// Method to Set City Location
-        City = Cy;
+    
+    public String getNewStreet(){
+        return newStreet;
     }
-
-    public String getCity() {// Retrieve City
-        return City;
+    
+    public void setNewCity(String nC){
+        newCity = nC;
     }
-
-    public void setNumber(String No) {// Method to Set Number
-        Phone = No;
+    
+    public String getNewCity(){
+        return newCity;
     }
-
-    public String getNumber() {// Retrieve Number
-        return Phone;
+    
+    public void setNewState(String nS){
+        newState = nS;
     }
-
-    public void setState(String Sa) {// Method to Set State Location
-        State = Sa;
+    
+    public String getNewState(){
+        return newState;
     }
-
-    public String getState() {// Retrieve State
-        return State;
+    
+    public void setNewPhone(String nP){
+        newPhone = nP;
+    }
+    
+    public String getNewPhone(){
+        return newPhone;
+    }
+    
+    public void setUserIDAdmin(String uID){
+        userID = uID; 
+    }
+    
+    public String getUserIDAdmin(){
+        return userID;
+    }
+    
+    public void setNewPassAdmin(String nPA){
+        newPassAdmin = nPA;
+    }
+    
+    public String getNewPassAdmin(){
+        return newPassAdmin;
+    }
+    
+    public void setNewStreetAdmin(String nSA){
+        newStreetAdmin = nSA;
+    }
+    
+    public String getNewStreetAdmin(){
+        return newStreetAdmin;
+    }
+    
+    public void setNewCityAdmin(String nCA){
+        newCityAdmin = nCA;
+    }
+    
+    public String getNewCityAdmin(){
+        return newCityAdmin;
+    }
+    
+    public void setNewStateAdmin(String nSA){
+        newStateAdmin = nSA;
+    }
+    
+    public String getNewStateAdmin(){
+        return newStateAdmin;
+    }
+    
+    public void setNewPhoneAdmin(String nPA){
+        newPhoneAdmin = nPA;
+    }
+    
+    public String getNewPhoneAdmin(){
+        return newPhoneAdmin;
     }
 }
-*/
