@@ -39,6 +39,16 @@ Key Features
             	When the Button is pressed, the only information that is updated are the elements that have input 50%
         •	The Delete button allows the user to delete the selected task when the Selected CheckBox is selected 75%
 
+Issues: 
+    -Features missing database code:
+        -Edit Task
+        -Sign In
+        -Account Management
+        -Complete, Edit, Delete buttons
+    -Account Management are not fully functional
+    -User Creation are not fully functional
+    -Complete, Edit and Delete Buttons are not fully functional
+
 
 ![](Doc/FinalUIFeatures-1.png)
 ![](Doc/FinalUIFeatures-2.png)
