@@ -1,4 +1,4 @@
-package cis285project;
+/*package cis285project;
 
 import javax.swing.JTextField;
 
@@ -7,7 +7,7 @@ public class Manager {
     public String user;// Name of Account In Use
     public int user_id = 1; // Possible Users Able to Login
     private String password;// Password of Account
-   public static int count = 1;// Possible Number of Passwords Account has in Use
+    public static int count = 1;// Possible Number of Passwords Account has in Use
     public static String input;
     public String Street;// Area of User
     public String Phone;// Number of User
@@ -16,9 +16,9 @@ public class Manager {
 
     /*
      * Constructor Variables for creating account User will provide this imformation
-     */
+     
 
-    public int Users (String Ruser, String Rpassword) {
+    public void Users (String Ruser, String Rpassword) {
 
         this.user_id = count++;
         this.user = Ruser;
@@ -27,8 +27,9 @@ public class Manager {
         System.out.printf("User %s has been updated \n", Ruser);
     }
 
-    boolean changePassword(){            
+    public boolean changePassword(){            
             String pass = ""; //get old password from user
+            boolean correct;
             int n = 1;
             while (n-- > 0) {
               if(pass.equals(password)) {
@@ -37,7 +38,7 @@ public class Manager {
                   if (newPass.equals(conNewPass)) {
                       password = newPass;
                       // password changed
-                      return true;
+                      
                   } else {
                       // wrong confirmation.. password not changed
                       return false;
@@ -48,13 +49,14 @@ public class Manager {
                   pass = ""; // ask user for old password again
               }
             }
+    }
 
     public static String Sr; String Ph; String Sa;String Cy;{
             this.City=Cy;
             this.Phone=Ph;
             this.State=Sa;
-            this.Street=Sr;}
-        }
+            this.Street=Sr;
+    }
 
     public void setCity(String Cy) {// Method to Set City Location
         City = Cy;
@@ -65,11 +67,11 @@ public class Manager {
     }
 
     public void setNumber(String No) {// Method to Set Number
-        Number = No;
+        Phone = No;
     }
 
     public String getNumber() {// Retrieve Number
-        return Number;
+        return Phone;
     }
 
     public void setState(String Sa) {// Method to Set State Location
@@ -80,3 +82,4 @@ public class Manager {
         return State;
     }
 }
+*/
