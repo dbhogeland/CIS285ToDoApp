@@ -53,7 +53,7 @@ Issues:
 ![](Doc/FinalUIFeatures-1.png)
 ![](Doc/FinalUIFeatures-2.png)
 ![](Doc/FinalUIFeatures-3.png)
-![](Doc/CIS285Project-UML-Diagram.png)
+![](Doc/CIS285Project-UML-Diagram-Final.png)
 
 
 

@@ -42,6 +42,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Alert;
 //import javafx.scene.control.ButtonBase;
 //import javafx.scene.control.Labeled;
 //import java.util.HashSet;
@@ -141,6 +142,7 @@ public class ProjUIController {
     @FXML private Button completeBtn; // Button that updates the completed value for the task
     @FXML private Button editBtn; // Button that edits the selected task if the user has permission
     @FXML private Button deleteBtn; // Button that deletes the selected task if the user has permission
+    @FXML private Alert alert;
     
   
     // Menu items located on the top menu bar
@@ -208,6 +210,72 @@ public class ProjUIController {
      * Void method which creates a LocalDate object for start date and gets 
      * the value from UI DatePicker and converts it into a string startD
      */
+    
+    public void userCreateBtnClick(ActionEvent event) {
+        
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Password ERROR!");
+        alert.setContentText("The passwords do not match!");
+        
+        User userObj = new User(createIDTxtBox.getText(), createPassTxtBox.getText(), createConfirmPassTxtBox.getText(), createStreetTxtBox.getText(), createCityTxtBox.getText(),
+            createStateTxtBox.getText(), createPhoneTxtBox.getText());
+        String temp = createPassTxtBox.getText().toString();
+        String temp2 = createConfirmPassTxtBox.getText().toString();
+        System.out.println(temp);
+        System.out.println(temp2);
+        if (temp.equals(temp2)) {
+            try {          
+            Class.forName("com.sun.jdi.connect.spi.Connection");
+            
+            con1 = DriverManager.getConnection(host, user, pass); // Creates connection to the MySQL database using host-datbase name/ username / password
+            insert = con1.prepareStatement("INSERT INTO user(username, password, street, city, state, phone)VALUES(?,?,?,?,?,?)"); 
+            
+            /*
+             * Uses PreparedStatement equal to insert and adds the values in the corresponding columns for one row at a time 
+             * Int - Column number , String - data to enter
+            */
+            insert.setString(1, userObj.getUserID());
+            insert.setString(2, userObj.getPass()); 
+            insert.setString(3, userObj.getStreet());
+            insert.setString(4, userObj.getCity());
+            insert.setString(5, userObj.getState());
+            insert.setString(6, userObj.getPhoneNumber());
+            
+            
+            insert.executeUpdate();
+            insert.close();
+            
+            System.out.println("Successfully updated MySql server!");
+            
+            } catch (ClassNotFoundException ex) {         
+                Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);
+            
+            } catch (SQLException ex) { 
+                Logger.getLogger(ProjUIController.class.getName()).log(Level.SEVERE, null, ex);            
+            }
+        }
+        else {
+            alert.showAndWait();
+            clearUserInfo();
+        }
+        
+        
+        
+        
+        clearUserInfo(); // Calls method that clears textfields 
+        
+    }
+    
+    
+    public void clearUserInfo() {
+        createIDTxtBox.clear();
+        createPassTxtBox.clear();
+        createConfirmPassTxtBox.clear();
+        createStreetTxtBox.clear();
+        createCityTxtBox.clear();
+        createStateTxtBox.clear();
+        createPhoneTxtBox.clear();
+    }
     
     public void setStartDate(ActionEvent event) {
         LocalDate startDate = startDatePicker.getValue();
@@ -937,6 +1005,7 @@ public class ProjUIController {
         }
         */
     }
+
     
     /*
      * Method to test for input on the fields of the Account Management tab and send input to the Manager Class
@@ -998,6 +1067,7 @@ public class ProjUIController {
         }
         
     }
+
 }
 
     
